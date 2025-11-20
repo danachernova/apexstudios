@@ -1,0 +1,10 @@
+@use '../helpers' as *;
+
+.description {
+  &__title {
+    font-size: fluid(30,48);
+  }
+  &__text{
+    max-width: rem(1215);
+  }
+}

@@ -1,0 +1,39 @@
+@use '../helpers' as *;
+
+.portfolio {
+  position: relative;
+  margin-block: rem(100);
+  user-select: none;
+
+  @include flex-center();
+  flex-direction: column;
+  row-gap: rem(50);
+
+  @include tablet {
+    row-gap: rem(25);
+  }
+
+  &__collection {
+  }
+
+  &__inner {
+    position: relative;
+    padding-bottom: 30px;
+  }
+
+
+  &__title {
+    font-size: fluid(30,64);
+    letter-spacing: -0.04em;
+  }
+
+  &__slide {
+    max-width: 40vw;
+    width: 100%;
+    aspect-ratio: 1/1.5;
+
+    @include tablet-above {
+      max-width: 30vw;
+    }
+  }
+}

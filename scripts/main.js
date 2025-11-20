@@ -1,0 +1,396 @@
+//header height
+function updateHeaderHeight() {
+  const header = document.querySelector('.header')
+  document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`)
+}
+
+window.addEventListener('load', updateHeaderHeight)
+window.addEventListener('resize', updateHeaderHeight)
+
+//swiper
+
+document.addEventListener('DOMContentLoaded', function() {
+  const swiper = new Swiper(".mySwiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    loop: true,
+    slidesPerView: "auto",
+    spaceBetween: -100,
+    speed: 600,
+    coverflowEffect: {
+      rotate: 0,
+      stretch: 0,
+      depth: 100,
+      modifier: 2.5,
+      slideShadows: false,
+    },
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    on: {
+      init() {
+        updateSlideBrightness(this);
+
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            const origSlides = Array.from(this.slides).filter(s => !s.classList.contains('swiper-slide-duplicate'));
+
+            const totalOriginal = origSlides.length;
+
+            if (totalOriginal > 0) {
+              const centerIndex = Math.floor(totalOriginal / 2); // 0-based
+
+              this.slideToLoop(centerIndex, 0, false);
+            }
+
+            updateSlideBrightness(this);
+          }, 30);
+        });
+      },
+
+      slideChangeTransitionStart() {
+        updateSlideBrightness(this);
+      },
+
+      transitionStart() {
+        updateSlideBrightness(this);
+      }
+    }
+  });
+
+  function updateSlideBrightness(swiperInstance) {
+    swiperInstance.slides.forEach((slide) => {
+      const img = slide.querySelector("img");
+      if (img) {
+        img.style.transition = "filter 0.2s ease";
+        img.style.filter = "brightness(0.4)";
+        if (slide.classList.contains("swiper-slide-active")) {
+          img.style.filter = "brightness(1)";
+        }
+      }
+    });
+  }
+});
+
+//slider form
+const steps = document.querySelectorAll('.form-step');
+const nextButtons = document.querySelectorAll('.next-button');
+const progressBar = document.querySelector('.form__progress-bar');
+
+const totalSteps = steps.length;
+let currentStep = 1;
+
+function updateSteps(step) {
+  steps.forEach(s => {
+    const sStep = Number(s.dataset.step);
+
+    if (sStep === step) s.classList.add('active');
+    else s.classList.remove('active');
+  });
+
+  updateProgress(step);
+}
+
+function updateProgress(step) {
+  const percentage = (step - 1) / (totalSteps - 1) * 100;
+  progressBar.style.width = percentage + '%';
+}
+nextButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const next = Number(btn.dataset.next);
+    currentStep = next;
+    updateSteps(currentStep);
+  });
+});
+
+//choose project-type and budget buttons
+document.querySelectorAll('.form__options').forEach(optionsBlock => {
+  const options = optionsBlock.querySelectorAll('.form__option');
+  const hiddenInput = optionsBlock.parentElement.querySelector('input[type="hidden"]');
+
+  options.forEach(option => {
+    option.addEventListener('click', () => {
+
+      if (option.classList.contains('active')) {
+        option.classList.remove('active');
+        hiddenInput.value = '';
+        return;
+      }
+
+      options.forEach(o => o.classList.remove('active'));
+
+      option.classList.add('active');
+      hiddenInput.value = option.dataset.value;
+    });
+  });
+});
+
+function progressbarUpdate() {
+  const progressBar = document.querySelector('.form__progress-bar');
+  const progressContainer = document.querySelector('.form__progress');
+  const steps = document.querySelectorAll('.form-step');
+  const totalSteps = steps.length;
+  const stepPercent = 100 / totalSteps;
+
+  if (!progressBar || !progressContainer || !steps.length) return;
+
+  const originalUpdateSteps = window.updateSteps;
+  window.updateSteps = function(step) {
+    if (typeof originalUpdateSteps === 'function') {
+      originalUpdateSteps(step);
+    }
+    updateProgressBar(step);
+  };
+
+  function updateProgressBar(step) {
+    if (step === totalSteps) {
+      progressContainer.style.opacity = '0';
+      progressBar.style.width = '0';
+      return;
+    }
+    progressContainer.style.opacity = '1';
+    progressBar.style.width = (stepPercent * step) + '%';
+  }
+
+  updateProgressBar(1);
+
+  const nextButtons = document.querySelectorAll('.next-button');
+  nextButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const nextStep = Number(btn.dataset.next);
+      updateProgressBar(nextStep);
+    });
+  });
+}
+
+progressbarUpdate()
+
+
+//send json object
+
+function getFormData() {
+  const formData = {};
+
+  const userNameInput = document.querySelector('#user-name');
+  const nameInput = document.querySelector('#name');
+  if (userNameInput) formData.contact = userNameInput.value.trim();
+  if (nameInput) formData.name = nameInput.value.trim();
+
+  const projectTypeInput = document.querySelector('#project-type');
+  if (projectTypeInput) formData.project_type = projectTypeInput.value;
+
+  const budgetInput = document.querySelector('#budget');
+  if (budgetInput) formData.budget = budgetInput.value;
+
+  const commentInput = document.querySelector('#comment');
+  if (commentInput) formData.comment = commentInput.value.trim();
+
+  return formData;
+}
+
+const formElement = document.querySelector('.form__list');
+if (formElement) {
+  formElement.addEventListener('submit', (e) => {
+    e.preventDefault(); // форма не отправляется на сервер, здесь шаманит Ваня, объект json в консоли
+    const dataToSend = getFormData();
+    console.log('Ваня, лови данные', JSON.stringify(dataToSend, null, 2));
+    setTimeout(() => location.reload(), 0);
+  });
+}
+
+//модалки
+
+const projectsData = {
+  charmstore: {
+    title: "Charmstore Club",
+    description: "At Charmstore Club, elegance meets confidence. A curated space for those who know luxury isn’t loud — it’s effortless. From timeless design to seamless experience, we built a digital boutique that speaks the language of modern charm. Style, simplicity, and sophistication — all in one click.",
+    link: "https://charmstore.club/",
+    images: [
+      "./images/projects/project-1-2.png",
+      "./images/projects/project-1.jpg",
+      "./images/projects/project-1-1.png"
+    ]
+  },
+  house: {
+    title: "House of Rohl",
+    description: "At House of Rohl, luxury flows without effort. We sculpted a digital experience where craftsmanship meets clarity, turning a microsite for their KBIS showcase into a curated journey of texture, finish, and elegance. From immersive visuals to sleek transitions, we made the space as refined as the fixtures themselves — tailored for those who expect quiet grandeur.",
+    link: "https://houseofrohl-kbis.atypicdev.com/",
+    images: [
+      "./images/projects/project-2-1.png",
+      "./images/projects/project-2.png",
+      "./images/projects/project-2-2.png"
+    ]
+  },
+  futureme: {
+    title: "FutureMe",
+    description: "At FutureMe, we built something simple yet powerful — a platform that lets you write a message to your future self and be sure it’ll reach you, even 10 years from now. Clean design, reliable tech, and smooth delivery — proof that meaningful ideas don’t need complexity to last.",
+    link: "https://www.futureme.org/",
+    images: [
+      "./images/projects/project-3-1.png",
+      "./images/projects/project-3.png",
+      "./images/projects/project-3-2.png"
+    ]
+  },
+  swap: {
+    title: "Window Swap",
+    description: "At Window Swap, we built a serene digital escape — a global window whose view changes every time. With seamless transitions and minimal design, users drift into peaceful scenes across the world. If you dreamed the web could pause and breathe, here it is.",
+    link: "https://window-swap.com",
+    images: [
+      "./images/projects/project-4-1.png",
+      "./images/projects/project-4.png",
+      "./images/projects/project-4-2.png"
+    ]
+  },
+  genoneai: {
+    title: "GenOneAi",
+    description: "At GenOneAI, we crafted a sleek digital interface that brings multiple AI tools under one roof. With streamlined navigation, intuitive flows and minimalist visuals, we turned complexity into clarity — so users can jump straight into outcomes, not onboarding. Designed by ApexStudios, built for those who demand instant access to next-level intelligence.",
+    link: "https://www.figma.com/proto/kEOhvhSwDafPIhz1PE95sR/GenOneAI--MVP-?page-id=0%3A1&node-id=73-14&p=f&t=Lz394y3Ss5sHtw7B-1&scaling=scale-down&content-scaling=fixed",
+    images: [
+      "./images/projects/phone-1.png",
+      "./images/projects/phone-2.png",
+      "./images/projects/phone-3.png",
+      "./images/projects/phone-4.png",
+      "./images/projects/phone-5.png",
+      "./images/projects/phone-6.png",
+      "./images/projects/phone-7.png",
+    ]
+  },
+  xuva: {
+    title: "Xuva",
+    description: "At Xuva, heritage flavours meet digital finesse. We crafted a responsive site for this Mexico City gem that echoes the spirit of Oaxaca — vibrant, refined and deeply rooted. With immersive visuals and polished UX, the experience invites visitors to step beyond a menu and into a curated world of taste, texture and culture. Luxury done quietly.",
+    link: "https://xuva.mx/",
+    images: [
+      "./images/projects/project-5-1.png",
+      "./images/projects/project-5.png",
+      "./images/projects/project-5-2.png"
+    ]
+  },
+};
+
+const portfolioSlides = document.querySelectorAll('.portfolio__slide');
+const mainElement = document.querySelector('.main');
+const projectsSection = document.querySelector('.projects');
+
+let projectSwiper = null;
+
+portfolioSlides.forEach(slide => {
+  slide.addEventListener('click', openProjectFromPortfolio);
+});
+
+function openProjectFromPortfolio(e) {
+  e.preventDefault();
+
+  const projectKey = this.dataset.project;
+  const projectData = projectsData[projectKey];
+
+  if (!projectData) return;
+
+  mainElement.querySelectorAll('section').forEach(section => {
+    if (!section.classList.contains('projects')) {
+      section.style.display = 'none';
+    }
+  });
+
+  projectsSection.style.display = 'grid';
+  projectsSection.classList.add('projects-active');
+
+
+  fillProjectSection(projectData, projectKey);
+
+  initProjectSwiper(projectData.images);
+}
+
+function fillProjectSection(data, projectKey) {
+  const title = projectsSection.querySelector('.projects__title');
+  title.textContent = data.title;
+
+  const desc = projectsSection.querySelector('.description__text');
+  desc.textContent = data.description;
+
+  const link = projectsSection.querySelector('.projects__link');
+  link.href = data.link;
+  link.target = "_blank";
+
+  if (projectKey === "genoneai") {
+    link.textContent = "Link to Figma";
+  } else {
+    link.textContent = data.link;
+  }
+
+  const wrapper = projectsSection.querySelector('.projects__inner .swiper-wrapper');
+  wrapper.innerHTML = '';
+
+  data.images.forEach(src => {
+    const slideClass = projectKey === "genoneai" ? "genoneai__slide" : "projects__slide";
+    wrapper.innerHTML += `
+      <div class="content swiper-slide ${slideClass}">
+        <img src="${src}" alt="" loading="lazy">
+      </div>
+    `;
+  });
+
+  const inner = projectsSection.querySelector('.projects__inner');
+  if (projectKey === "genoneai") {
+    inner.classList.add('genoneai');
+  } else {
+    inner.classList.remove('genoneai');
+  }
+}
+
+function initProjectSwiper() {
+  if (projectSwiper) {
+    projectSwiper.destroy(true, true);
+  }
+
+  projectSwiper = new Swiper(".projects__inner", {
+    slidesPerView: 1,
+    loop: true,
+    speed: 600,
+    pagination: {
+      el: ".projects__pagination",
+      clickable: true,
+    },
+  });
+}
+
+document.addEventListener('click', (e) => {
+  if (!projectsSection.classList.contains('projects-active')) return;
+
+  const target = e.target;
+
+  if (target.closest('.swiper-wrapper')) return;
+
+  if (target.closest('.portfolio__slide')) return;
+
+  restoreMain();
+});
+
+function restoreMain() {
+  mainElement.querySelectorAll('section').forEach(section => {
+    section.style.display = '';
+  });
+
+  projectsSection.style.display = 'none';
+  projectsSection.classList.remove('projects-active');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

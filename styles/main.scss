@@ -1,0 +1,25 @@
+@use 'reset';
+@use 'fonts';
+@use 'veriables';
+@use 'utils';
+@use 'globals';
+
+@use 'blocks/logo';
+@use 'blocks/header';
+@use 'blocks/button';
+@use 'blocks/clouds';
+@use 'blocks/banner';
+@use 'blocks/about';
+
+@use 'blocks/description';
+@use 'blocks/genoneai';
+@use 'blocks/projects';
+
+@use 'blocks/swiper';
+
+@use 'blocks/portfolio';
+@use 'blocks/collection';
+
+@use 'blocks/form';
+
+@use 'blocks/footer';

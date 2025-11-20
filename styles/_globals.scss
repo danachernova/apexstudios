@@ -1,0 +1,44 @@
+@use 'helpers' as *;
+
+body {
+  @include fluid-text(16, 20);
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: var(--font-family-base);
+  color: var(--color-light-d1);
+
+  background-color: var(--color-bg-main);
+  background-image: url(/images/bg.jpg);
+  background-size: 100% auto;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+
+  &:has(.projects.projects-active) {
+    background-image: none;
+    background-color: var(--color-bg-main);
+  }
+}
+
+main {
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+a,
+button,
+label,
+input,
+textarea,
+select,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  color: inherit;
+  &[class] {
+    text-decoration: none;
+  }
+}

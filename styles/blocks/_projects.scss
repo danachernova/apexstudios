@@ -1,0 +1,46 @@
+@use '../helpers' as *;
+
+.projects {
+  display: grid;
+  row-gap: rem(40);
+  margin-block: rem(53);
+
+  font-size: fluid(18,32);
+  letter-spacing: -0.04em;
+
+  &__inner {
+    position: relative;
+    padding-bottom: 30px;
+  }
+
+  &__collection {
+  }
+
+  &__pagination {
+  }
+
+  &__title {
+    padding-inline: var(--container-padding-x);
+    font-size: fluid(30,64);
+    font-weight: 500;
+  }
+
+  &__slide {
+      max-width: rem(1215);
+      width: 84vw;
+  }
+
+
+  &__description {
+    display: grid;
+    row-gap: rem(17);
+  }
+
+  &__link {
+    margin-top: rem(20);
+  }
+}
+
+.projects {
+  display: none;
+}

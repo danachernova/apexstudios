@@ -1,0 +1,27 @@
+@use '../helpers' as *;
+
+.projects__inner.genoneai {
+  position: relative;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+
+  .swiper-wrapper.genoneai {
+    display: flex;
+    align-items: center;
+  }
+
+  .genoneai__slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 40vw;
+    width: 100%;
+    aspect-ratio: 1/1.8;
+
+    @include tablet-above {
+      max-width: 30vw;
+    }
+  }
+}

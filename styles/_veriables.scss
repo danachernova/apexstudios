@@ -1,0 +1,23 @@
+@use 'helpers' as *;
+
+:root {
+  --color-dark: #0A151E;
+  --color-bg-main: #070A0E;
+  --color-bg-main: #01070D;
+  --color-dark-alt: #1B2831;
+  --color-accent: #003C78;
+  --color-light-d1: #D1E9FE;
+  --color-light-d2: #D2EAFF;
+
+  --color-border: #708998;
+
+  --font-family-base: 'Inter', sans-serif;
+  --font-family-accent: 'Lexend', sans-serif;
+
+  --container-width: #{rem(1180)};
+  --container-padding-x: #{rem(16)};
+
+  --header-height: 0px;
+
+  --transition-duration: 0.2s;
+}

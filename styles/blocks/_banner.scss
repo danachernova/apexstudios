@@ -1,0 +1,55 @@
+@use '../helpers' as *;
+
+.banner {
+  position: relative;
+  padding-block: rem(100);
+  min-height: calc(100dvh - var(--header-height));
+
+ &__main {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   row-gap: rem(50);
+ }
+  &__body{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    row-gap: fluid(34,54);
+    max-width: rem(1045);
+    letter-spacing: -0.04em;
+    color: var(--color-accent);
+
+    @include tablet {
+      row-gap: rem(34);
+    }
+  }
+
+  &__title {
+    font-family: var(--font-family-accent);
+    font-size: fluid(40,96);
+    line-height: 0.85;
+  }
+  &__subtitle {
+    display: inline-block;
+    max-width: rem(530);
+    line-height: 1.3;
+    font-size: fluid(25,36);
+
+    @include mobile-s {
+      font-size: rem(20);
+    }
+  }
+
+  &__contact-us {
+    max-width: rem(200);
+    margin-inline: auto;
+   margin-top: auto;
+  }
+}
+
+
+.banner__main > * {
+  z-index: 100;
+}
+

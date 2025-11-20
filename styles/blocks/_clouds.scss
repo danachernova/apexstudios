@@ -1,0 +1,87 @@
+@use '../helpers' as *;
+
+.banner__clouds {
+  @include abs-center;
+  width: 100vw;
+  min-height: rem(315);
+  height: 100%;
+}
+
+.cloud {
+  position: absolute;
+  width: 50vw;
+  opacity: 1;
+
+  @include tablet {
+    width: rem(777);
+  }
+}
+
+.cloud--l1 {
+  --initial: -100%;
+  top: 18%;
+  left: 50%;
+  transform: translateX(var(--initial));
+  z-index: 2;
+}
+.cloud--l2 {
+  --initial: -80%;
+  top: 35%;
+  left: 50%;
+  transform: translateX(var(--initial));
+  z-index: 1;
+}
+
+.cloud--r1 {
+  --initial: 0%;
+  top: 18%;
+  left: 50%;
+  transform: translateX(var(--initial));
+  z-index: 2;
+}
+.cloud--r2 {
+  --initial: -20%;
+  top: 35%;
+  left: 50%;
+  transform: translateX(var(--initial));
+  z-index: 1;
+}
+
+
+@keyframes cloud-left-out {
+  from {
+    transform: translateX(var(--initial));
+    opacity: 1;
+  }
+  to {
+    transform: translateX(calc(var(--initial) - 300vw));
+    opacity: 0;
+  }
+}
+
+@keyframes cloud-right-out {
+  from {
+    transform: translateX(var(--initial));
+    opacity: 1;
+  }
+  to {
+    transform: translateX(calc(var(--initial) + 300vw));
+    opacity: 0;
+  }
+}
+
+.cloud {
+  animation-timeline: scroll(root block);
+  animation-duration: var(--transition-duration);
+  animation-range: entry 5% exit 50%;
+}
+
+.cloud--l1,
+.cloud--l2 {
+  animation-name: cloud-left-out;
+}
+
+.cloud--r1,
+.cloud--r2 {
+  animation-name: cloud-right-out;
+}

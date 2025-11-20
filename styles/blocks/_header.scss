@@ -1,0 +1,55 @@
+@use '../helpers' as *;
+
+.header {
+  background-color: transparent;
+  &__body {
+    margin-block: rem(30);
+    @include mobile-s {
+      margin-block: rem(15);
+    }
+  }
+
+  &__menu {
+    &-list {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      white-space: nowrap;
+      column-gap: rem(20);
+
+      @include mobile-s {
+        flex-wrap: wrap;
+      }
+    }
+    &-item {
+      @include mobile-s {
+        &:has(a.logo){
+          order: -1;
+          flex-basis: 100%;
+
+        }
+      }
+    }
+    &-link {
+      text-align: center;
+      @include mobile-above {
+        padding: rem(10);
+      }
+      @include mobile {
+        padding-block: rem(10);
+      }
+      @include hover {
+        color: var(--color-light-d2);
+        text-shadow:
+          0 0 1px var(--color-light-d2),
+          0 0 3px var(--color-light-d2);
+      }
+    }
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+  }
+}
+

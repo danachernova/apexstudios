@@ -1,0 +1,22 @@
+@use '../helpers' as *;
+
+.footer {
+    padding-block: rem(22);
+  @include mobile {
+    padding-block: rem(15);
+  }
+
+  font-size: rem(14);
+  font-weight: 100;
+  letter-spacing: -0.04em;
+  text-align: center;
+  &__inner {
+    @include flex-center();
+  }
+  &__list {
+
+  }
+  &__item {}
+  &__link {
+  }
+}

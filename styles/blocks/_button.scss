@@ -1,0 +1,30 @@
+@use '../helpers' as *;
+
+.button {
+  color: var(--color-light-d2);
+  text-shadow:
+    0 0 1px var(--color-light-d2),
+    0 0 3px var(--color-light-d2);
+
+  &--accent {
+    font-size: fluid(20,24);
+    background-color: var(--color-dark);
+    border: 2px solid var(--color-light-d1);
+    box-shadow: inset 2px 2px 4px 0 #2e5884, 0 0 10px 0 #80bfff, 0 0 43px 10px rgba(128, 191, 255, 0.25);
+    border-radius: 200px;
+    padding: rem(20) rem(35);
+
+    @include mobile {
+      padding: rem(10) rem(25);
+    }
+
+    @include hover {
+      box-shadow:
+        0 0 5px var(--color-light-d2),
+        0 0 3px var(--color-light-d2);
+      background-color: var(--color-light-d1);
+      color: var(--color-dark);
+    }
+
+  }
+}

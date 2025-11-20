@@ -1,0 +1,14 @@
+@use '../helpers' as *;
+
+
+.logo {
+  font-family: var(--font-family-accent);
+  font-size: fluid(14,24);
+  max-height: rem(30);
+
+  &__image {
+    height: fluid(14,24);
+    @include square(#{fluid(14,24)});
+    align-self: start;
+  }
+}

@@ -1,0 +1,167 @@
+/** Нормализация блочной модели */
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  /** Пригодится в большинстве ситуаций (когда, например, нужно будет "прижать" футер к низу сайта) */
+  height: 100%;
+  /** Убираем скачок интерфейса по горизонтали при появлении / исчезновении скроллбара */
+  scrollbar-gutter: stable;
+}
+
+/** Плавный скролл */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+  Пригодится в большинстве ситуаций (когда, например, нужно будет "прижать" футер к низу сайта)
+ */
+  min-height: 100%;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ul li {
+  list-style: none;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+a,
+input,
+textarea,
+select,
+button,
+label {
+  font: inherit;
+  color: inherit;
+}
+
+button{
+  border: 0;
+}
+/**
+  Курсор-рука при наведении на элемент
+ */
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+ */
+
+a,
+a:visited,
+a:hover {
+  text-decoration: none;
+}
+
+a:where([class]) {
+  display: inline-flex;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+/** Упрощаем работу с изображениями и видео */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+img {
+  vertical-align: top;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+:where(fieldset[class]) {
+  border: none;
+}
+
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+ */
+
+:where([fill]:not(
+  [fill="none"],
+  [fill^="url"]
+)) {
+  fill: currentColor;
+}
+:where([stroke]:not(
+  [stroke="none"],
+  [stroke^="url"]
+)) {
+  stroke: currentColor;
+}
+
+/**
+  Убираем баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+textarea {
+  resize: none;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
