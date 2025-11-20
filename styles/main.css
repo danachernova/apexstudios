@@ -206,8 +206,7 @@ textarea {
 }
 :root {
   --color-dark: #0A151E;
-  --color-bg-main: #070A0E;
-  --color-bg-main: #01070D;
+  --color-bg-main: #010507;
   --color-dark-alt: #1B2831;
   --color-accent: #003C78;
   --color-light-d1: #D1E9FE;
@@ -245,11 +244,11 @@ body {
   flex-direction: column;
   font-family: var(--font-family-base);
   color: var(--color-light-d1);
-  background-color: var(--color-bg-main);
-  background-image: url(/images/bg.jpg);
+  background-image: url(/images/bg-main.png);
   background-size: 100% auto;
   background-position: 0 0;
   background-repeat: no-repeat;
+  background-color: var(--color-bg-main);
 }
 body:has(.projects.projects-active) {
   background-image: none;
@@ -738,6 +737,7 @@ a[class] {
 .form {
   position: relative;
   min-height: 100dvh;
+  height: 100%;
   font-size: clamp(1.25rem, 0.3860759494rem + 3.5443037975vw, 3rem);
   display: grid;
 }
@@ -746,12 +746,21 @@ a[class] {
   position: absolute;
   inset: 0;
   transform: translateX(-25%);
-  font-size: clamp(2.5rem, 0.957278481rem + 6.3291139241vw, 5.625rem);
+  font-size: clamp(2.5rem, 0.0316455696rem + 10.1265822785vw, 7.5rem);
   font-weight: 600;
   color: #060F16;
   white-space: nowrap;
   pointer-events: none;
   z-index: 0;
+  width: max-content;
+}
+@media (width > 73.81125rem) {
+  .form::before {
+    inset: auto;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 .form__list {
   padding-block: 3.4375rem;
