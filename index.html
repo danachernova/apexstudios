@@ -8,7 +8,7 @@
   <title>ApexStudios</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   <link rel="stylesheet" href="styles/main.css" />
-  <script src="scripts/main.js" type="module"></script>
+  <script src="scripts/main.js"></script>
 </head>
 <body>
   <header class="header" data-js-header>
@@ -182,25 +182,26 @@
         <div class="form__item form-step active" data-step="1">
           <label for="user-name" class="form__label">How should we contact you?</label>
           <ul class="form__socials">
-            <li class="form__socials-item">
+            <li class="form__socials-item" data-value="whatsapp">
               <img
                 src="icons/contact-1.svg"
                 alt=""
               />
             </li>
-            <li class="form__socials-item">
+            <li class="form__socials-item" data-value="telegram">
               <img
                 src="icons/contact-2.svg"
                 alt=""
               />
             </li>
-            <li class="form__socials-item">
+            <li class="form__socials-item" data-value="email">
               <img
                 src="icons/contact-3.svg"
                 alt=""
               />
             </li>
           </ul>
+          <input type="hidden" name="contact_type" id="contact-type">
           <div class="form__input-inner">
             <input
               type="text"
