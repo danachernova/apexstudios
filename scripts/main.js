@@ -217,7 +217,7 @@ if (formElement) {
     e.preventDefault(); // форма не отправляется на сервер, здесь шаманит Ваня, объект json в консоли
     const dataToSend = getFormData();
     console.log('Ваня, лови данные', JSON.stringify(dataToSend, null, 2));
-    // setTimeout(() => location.reload(), 0);
+    setTimeout(() => location.reload(), 0);
   });
 }
 
