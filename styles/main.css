@@ -783,12 +783,12 @@ a[class] {
 }
 @media (width <= 58.81125rem) {
   .form__item:has(input[type=text]) {
-    max-height: 10.25rem;
+    max-height: 12.5rem;
   }
 }
 @media (width <= 58.81125rem) {
   .form__item:has(ul) {
-    max-height: 12.8125rem;
+    max-height: 18.75rem;
   }
 }
 .form__label {
@@ -850,10 +850,17 @@ a[class] {
   justify-content: center;
   align-items: center;
   column-gap: 1.5625rem;
+  cursor: pointer;
 }
-.form__socials-item img {
-  width: 40px;
-  height: 40px;
+.form__socials-item {
+  color: #505B61;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-duration: var(--transition-duration);
+}
+.form__socials-item.active {
+  color: var(--color-light-d1);
 }
 .form__text {
   row-gap: 0.75rem;

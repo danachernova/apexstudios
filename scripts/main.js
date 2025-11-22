@@ -110,6 +110,7 @@ nextButtons.forEach(btn => {
 });
 
 //choose project-type and budget buttons
+
 document.querySelectorAll('.form__options').forEach(optionsBlock => {
   const options = optionsBlock.querySelectorAll('.form__option');
   const hiddenInput = optionsBlock.parentElement.querySelector('input[type="hidden"]');
@@ -127,6 +128,19 @@ document.querySelectorAll('.form__options').forEach(optionsBlock => {
 
       option.classList.add('active');
       hiddenInput.value = option.dataset.value;
+    });
+  });
+});
+
+document.querySelectorAll('.form__socials').forEach(block => {
+  const items = block.querySelectorAll('.form__socials-item');
+  const hiddenInput = document.querySelector('#contact-type');
+
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      items.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      hiddenInput.value = item.dataset.value;
     });
   });
 });
@@ -182,6 +196,9 @@ function getFormData() {
   if (userNameInput) formData.contact = userNameInput.value.trim();
   if (nameInput) formData.name = nameInput.value.trim();
 
+  const contactTypeInput = document.querySelector('#contact-type');
+  if (contactTypeInput) formData.contact_type = contactTypeInput.value;
+
   const projectTypeInput = document.querySelector('#project-type');
   if (projectTypeInput) formData.project_type = projectTypeInput.value;
 
@@ -200,7 +217,7 @@ if (formElement) {
     e.preventDefault(); // форма не отправляется на сервер, здесь шаманит Ваня, объект json в консоли
     const dataToSend = getFormData();
     console.log('Ваня, лови данные', JSON.stringify(dataToSend, null, 2));
-    setTimeout(() => location.reload(), 0);
+    // setTimeout(() => location.reload(), 0);
   });
 }
 

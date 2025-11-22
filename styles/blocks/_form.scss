@@ -53,12 +53,12 @@
 
       &:has(input[type="text"]){
           @include tablet {
-            max-height: rem(164);
+            max-height: rem(200);
           }
       }
       &:has(ul) {
         @include tablet {
-          max-height: rem(205);
+          max-height: rem(300);
         }
       }
     }
@@ -115,11 +115,21 @@
     &__socials {
       @include flex-center();
       column-gap: rem(25);
+      cursor: pointer;
       &-item {
+        color: #505B61;
+        @include flex-center();
+        transition-duration: var(--transition-duration);
+
+        &.active {
+          color: var(--color-light-d1);
+        }
       }
-      &-item img{
-      @include square(40px);
-      }
+//      &-item svg {
+//      @include square(40px);
+//      transition-duration: var(--transition-duration);
+//      }
+
     }
 
     &__text {
