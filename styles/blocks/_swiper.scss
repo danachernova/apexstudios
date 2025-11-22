@@ -19,7 +19,7 @@
 }
 
 .swiper-pagination-bullet {
-  @include square(10px);
+  @include square(9px);
   background: var(--color-light-d1);
   margin: 0 6px;
   transition: all var(--transition-duration) ease;
@@ -30,10 +30,6 @@
   @include hover {
     opacity: 1;
     transform: scale(1.1);
-  }
-
-  @include tablet {
-    @include square(8px)
   }
 }
 

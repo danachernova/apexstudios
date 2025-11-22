@@ -642,8 +642,8 @@ a[class] {
 }
 
 .swiper-pagination-bullet {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   background: var(--color-light-d1);
   margin: 0 6px;
   transition: all var(--transition-duration) ease;
@@ -661,12 +661,6 @@ a[class] {
   .swiper-pagination-bullet:active {
     opacity: 1;
     transform: scale(1.1);
-  }
-}
-@media (width <= 58.81125rem) {
-  .swiper-pagination-bullet {
-    width: 8px;
-    height: 8px;
   }
 }
 
