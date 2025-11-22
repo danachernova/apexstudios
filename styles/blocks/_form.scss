@@ -269,7 +269,7 @@
   background-color: #505B61;
   border-radius: 50%;
   transition-duration: var(--transition-duration);
-  background-image: url("/icons/arrow.png");
+  background-image: url("../icons/arrow.png");
   background-size: 9px 14px;
   background-repeat: no-repeat;
   background-position: center;
@@ -279,7 +279,7 @@
       0 0 5px var(--color-light-d2),
       0 0 3px var(--color-light-d2);
     background-color: var(--color-light-d1);
-    background-image: url("/icons/arrow-hover.png");
+    background-image: url("../icons/arrow-hover.png");
   }
 
   @include mobile-s {
