@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     slidesPerView: "auto",
     spaceBetween: -100,
     speed: 600,
+    simulateTouch: true,
     coverflowEffect: {
       rotate: 0,
       stretch: 0,
@@ -321,6 +322,10 @@ function openProjectFromPortfolio(e) {
   fillProjectSection(projectData, projectKey);
 
   initProjectSwiper(projectData.images);
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
 function fillProjectSection(data, projectKey) {
@@ -382,7 +387,6 @@ document.addEventListener('click', (e) => {
   const target = e.target;
 
   if (target.closest('.swiper-wrapper')) return;
-
   if (target.closest('.portfolio__slide')) return;
 
   restoreMain();
