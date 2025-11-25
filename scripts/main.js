@@ -388,6 +388,7 @@ document.addEventListener('click', (e) => {
 
   if (target.closest('.swiper-wrapper')) return;
   if (target.closest('.portfolio__slide')) return;
+  if (target.closest('.projects__collection')) return;
 
   restoreMain();
 });

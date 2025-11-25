@@ -258,6 +258,7 @@ body:has(.projects.projects-active) {
 main {
   flex-grow: 1;
   overflow-x: hidden;
+  user-select: none;
 }
 
 a,
@@ -388,6 +389,7 @@ a[class] {
   width: 100vw;
   min-height: 19.6875rem;
   height: 100%;
+  pointer-events: none;
 }
 
 .cloud {
@@ -1048,6 +1050,34 @@ a[class] {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.footer_contacts {
+  font-size: clamp(0.875rem, 0.6898734177rem + 0.7594936709vw, 1.25rem);
+  white-space: nowrap;
+  padding-bottom: 1.5625rem;
+  display: grid;
+  row-gap: 0.3125rem;
+}
+@media (width > 47.99875rem) {
+  .footer_contacts {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 5vw;
+    padding-bottom: 3.125rem;
+  }
+}
+@media (any-hover: hover) {
+  .footer_contacts a:hover {
+    color: var(--color-light-d2);
+    text-shadow: 0 0 1px var(--color-light-d2), 0 0 3px var(--color-light-d2);
+    scale: 1.1;
+  }
+}
+@media (any-hover: none) {
+  .footer_contacts a:active {
+    color: var(--color-light-d2);
+    text-shadow: 0 0 1px var(--color-light-d2), 0 0 3px var(--color-light-d2);
+    scale: 1.1;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
