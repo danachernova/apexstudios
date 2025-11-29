@@ -57,7 +57,6 @@ function initSwiper(selector, enableAutoplay = true) {
     }
   };
 
-  // Добавляем autoplay только если включен
   if (enableAutoplay) {
     swiperConfig.autoplay = {
       delay: 3000,
@@ -84,16 +83,165 @@ function initSwiper(selector, enableAutoplay = true) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Слайдер портфолио на главной
   if (document.querySelector('.portfolio__inner')) {
     initSwiper('.portfolio__inner');
   }
-
-  // Слайдер проектов на странице проекта (с задержкой чтобы данные успели загрузиться)
   if (document.querySelector('.projects__inner')) {
     setTimeout(() => {
-      initSwiper('.projects__inner');
+      initSwiper('.projects__inner', false);
     }, 100);
+  }
+});
+
+
+//модалки
+
+document.addEventListener('DOMContentLoaded', function() {
+  const isProjectsPage = window.location.pathname.includes('projects.html');
+  const isIndexPage = !isProjectsPage;
+
+  if (isIndexPage) {
+    const portfolioLinks = document.querySelectorAll('.portfolio__slide');
+    portfolioLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const projectId = this.dataset.project;
+        sessionStorage.setItem('selectedProject', projectId);
+        window.location.href = `./projects.html?project=${projectId}`;
+      });
+    });
+  }
+
+  if (isProjectsPage) {
+    const urlParams = new URLSearchParams(window.location.search);
+    let projectId = urlParams.get('project');
+    if (!projectId) {
+      projectId = sessionStorage.getItem('selectedProject');
+    }
+
+    const projectsData = {
+      charmstore: {
+        title: "Charmstore Club",
+        description: "At Charmstore Club, elegance meets confidence. A curated space for those who know luxury isn't loud — it's effortless. From timeless design to seamless experience, we built a digital boutique that speaks the language of modern charm. Style, simplicity, and sophistication — all in one click.",
+        link: "https://charmstore.club/",
+        images: [
+          "./images/projects/project-1-2.png",
+          "./images/projects/project-1.jpg",
+          "./images/projects/project-1-1.png"
+        ]
+      },
+      house: {
+        title: "House of Rohl",
+        description: "At House of Rohl, luxury flows without effort. We sculpted a digital experience where craftsmanship meets clarity, turning a microsite for their KBIS showcase into a curated journey of texture, finish, and elegance. From immersive visuals to sleek transitions, we made the space as refined as the fixtures themselves — tailored for those who expect quiet grandeur.",
+        link: "https://houseofrohl-kbis.atypicdev.com/",
+        images: [
+          "./images/projects/project-2-1.png",
+          "./images/projects/project-2.png",
+          "./images/projects/project-2-2.png"
+        ]
+      },
+      futureme: {
+        title: "FutureMe",
+        description: "At FutureMe, we built something simple yet powerful — a platform that lets you write a message to your future self and be sure it'll reach you, even 10 years from now. Clean design, reliable tech, and smooth delivery — proof that meaningful ideas don't need complexity to last.",
+        link: "https://www.futureme.org/",
+        images: [
+          "./images/projects/project-3-1.png",
+          "./images/projects/project-3.png",
+          "./images/projects/project-3-2.png"
+        ]
+      },
+      swap: {
+        title: "Window Swap",
+        description: "At Window Swap, we built a serene digital escape — a global window whose view changes every time. With seamless transitions and minimal design, users drift into peaceful scenes across the world. If you dreamed the web could pause and breathe, here it is.",
+        link: "https://window-swap.com",
+        images: [
+          "./images/projects/project-4-1.png",
+          "./images/projects/project-4.png",
+          "./images/projects/project-4-2.png"
+        ]
+      },
+      genoneai: {
+        title: "GenOneAi",
+        description: "At GenOneAI, we crafted a sleek digital interface that brings multiple AI tools under one roof. With streamlined navigation, intuitive flows and minimalist visuals, we turned complexity into clarity — so users can jump straight into outcomes, not onboarding. Designed by ApexStudios, built for those who demand instant access to next-level intelligence.",
+        link: "https://www.figma.com/proto/kEOhvhSwDafPIhz1PE95sR/GenOneAI--MVP-?page-id=0%3A1&node-id=73-14&p=f&t=Lz394y3Ss5sHtw7B-1&scaling=scale-down&content-scaling=fixed",
+        images: [
+          "./images/projects/phone-1.png",
+          "./images/projects/phone-2.png",
+          "./images/projects/phone-3.png",
+          "./images/projects/phone-4.png",
+          "./images/projects/phone-5.png",
+          "./images/projects/phone-6.png",
+          "./images/projects/phone-7.png",
+        ]
+      },
+      xuva: {
+        title: "Xuva",
+        description: "At Xuva, heritage flavours meet digital finesse. We crafted a responsive site for this Mexico City gem that echoes the spirit of Oaxaca — vibrant, refined and deeply rooted. With immersive visuals and polished UX, the experience invites visitors to step beyond a menu and into a curated world of taste, texture and culture. Luxury done quietly.",
+        link: "https://xuva.mx/",
+        images: [
+          "./images/projects/project-5-1.png",
+          "./images/projects/project-5.png",
+          "./images/projects/project-5-2.png"
+        ]
+      },
+    };
+
+    if (projectId && projectsData[projectId]) {
+      fillProjectSection(projectsData[projectId], projectId);
+      sessionStorage.removeItem('selectedProject');
+
+      window.addEventListener('beforeunload', function() {
+        sessionStorage.setItem('returnToIndex', 'true');
+      });
+    } else {
+      if (window.location.search === '' || sessionStorage.getItem('returnToIndex') === 'true') {
+        sessionStorage.removeItem('returnToIndex');
+        window.location.href = './index.html';
+      }
+      return;
+    }
+
+    function fillProjectSection(data, projectKey) {
+      document.title = `${data.title} | ApexStudios`;
+
+      const title = document.querySelector('.projects__title');
+      const desc = document.querySelector('.description__text');
+      const link = document.querySelector('.projects__link');
+      const wrapper = document.querySelector('.projects__inner .swiper-wrapper');
+
+      if (title) title.textContent = data.title;
+      if (desc) desc.textContent = data.description;
+
+      if (link) {
+        link.href = data.link;
+        link.target = "_blank";
+        link.textContent = projectKey === "genoneai" ? "Link to Figma" : data.link;
+      }
+
+      if (wrapper) {
+        wrapper.innerHTML = '';
+        data.images.forEach(src => {
+          const slideClass = projectKey === "genoneai" ? "genoneai__slide" : "projects__slide";
+          const slide = document.createElement('div');
+          slide.className = `content swiper-slide ${slideClass}`;
+
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = data.title;
+          img.loading = "lazy";
+          img.width = 1215;
+          img.height = 788;
+
+          slide.appendChild(img);
+          wrapper.appendChild(slide);
+        });
+      }
+
+      const inner = document.querySelector('.projects__inner');
+      if (inner) {
+        inner.classList.toggle('genoneai', projectKey === "genoneai");
+      }
+    }
   }
 });
 
@@ -239,401 +387,6 @@ if (formElement) {
     setTimeout(() => location.reload(), 0);
   });
 }
-
-//модалки
-
-// const projectsData = {
-//   charmstore: {
-//     title: "Charmstore Club",
-//     description: "At Charmstore Club, elegance meets confidence. A curated space for those who know luxury isn’t loud — it’s effortless. From timeless design to seamless experience, we built a digital boutique that speaks the language of modern charm. Style, simplicity, and sophistication — all in one click.",
-//     link: "https://charmstore.club/",
-//     images: [
-//       "./images/projects/project-1-2.png",
-//       "./images/projects/project-1.jpg",
-//       "./images/projects/project-1-1.png"
-//     ]
-//   },
-//   house: {
-//     title: "House of Rohl",
-//     description: "At House of Rohl, luxury flows without effort. We sculpted a digital experience where craftsmanship meets clarity, turning a microsite for their KBIS showcase into a curated journey of texture, finish, and elegance. From immersive visuals to sleek transitions, we made the space as refined as the fixtures themselves — tailored for those who expect quiet grandeur.",
-//     link: "https://houseofrohl-kbis.atypicdev.com/",
-//     images: [
-//       "./images/projects/project-2-1.png",
-//       "./images/projects/project-2.png",
-//       "./images/projects/project-2-2.png"
-//     ]
-//   },
-//   futureme: {
-//     title: "FutureMe",
-//     description: "At FutureMe, we built something simple yet powerful — a platform that lets you write a message to your future self and be sure it’ll reach you, even 10 years from now. Clean design, reliable tech, and smooth delivery — proof that meaningful ideas don’t need complexity to last.",
-//     link: "https://www.futureme.org/",
-//     images: [
-//       "./images/projects/project-3-1.png",
-//       "./images/projects/project-3.png",
-//       "./images/projects/project-3-2.png"
-//     ]
-//   },
-//   swap: {
-//     title: "Window Swap",
-//     description: "At Window Swap, we built a serene digital escape — a global window whose view changes every time. With seamless transitions and minimal design, users drift into peaceful scenes across the world. If you dreamed the web could pause and breathe, here it is.",
-//     link: "https://window-swap.com",
-//     images: [
-//       "./images/projects/project-4-1.png",
-//       "./images/projects/project-4.png",
-//       "./images/projects/project-4-2.png"
-//     ]
-//   },
-//   genoneai: {
-//     title: "GenOneAi",
-//     description: "At GenOneAI, we crafted a sleek digital interface that brings multiple AI tools under one roof. With streamlined navigation, intuitive flows and minimalist visuals, we turned complexity into clarity — so users can jump straight into outcomes, not onboarding. Designed by ApexStudios, built for those who demand instant access to next-level intelligence.",
-//     link: "https://www.figma.com/proto/kEOhvhSwDafPIhz1PE95sR/GenOneAI--MVP-?page-id=0%3A1&node-id=73-14&p=f&t=Lz394y3Ss5sHtw7B-1&scaling=scale-down&content-scaling=fixed",
-//     images: [
-//       "./images/projects/phone-1.png",
-//       "./images/projects/phone-2.png",
-//       "./images/projects/phone-3.png",
-//       "./images/projects/phone-4.png",
-//       "./images/projects/phone-5.png",
-//       "./images/projects/phone-6.png",
-//       "./images/projects/phone-7.png",
-//     ]
-//   },
-//   xuva: {
-//     title: "Xuva",
-//     description: "At Xuva, heritage flavours meet digital finesse. We crafted a responsive site for this Mexico City gem that echoes the spirit of Oaxaca — vibrant, refined and deeply rooted. With immersive visuals and polished UX, the experience invites visitors to step beyond a menu and into a curated world of taste, texture and culture. Luxury done quietly.",
-//     link: "https://xuva.mx/",
-//     images: [
-//       "./images/projects/project-5-1.png",
-//       "./images/projects/project-5.png",
-//       "./images/projects/project-5-2.png"
-//     ]
-//   },
-// };
-
-// document.addEventListener('DOMContentLoaded', function() {
-//   // Определяем на какой странице мы находимся
-//   const isProjectsPage = window.location.pathname.includes('projects.html');
-//   const isIndexPage = !isProjectsPage;
-//
-//   // Логика для главной страницы
-//   if (isIndexPage) {
-//     const portfolioLinks = document.querySelectorAll('.portfolio__slide');
-//
-//     portfolioLinks.forEach(link => {
-//       link.addEventListener('click', function(e) {
-//         e.preventDefault();
-//         const projectId = this.dataset.project;
-//         sessionStorage.setItem('selectedProject', projectId);
-//         window.location.href = `./projects.html?project=${projectId}`;
-//       });
-//     });
-//   }
-//
-//   // Логика для страницы проекта
-//   if (isProjectsPage) {
-//     // Получаем projectId: сначала из URL, потом из sessionStorage
-//     const urlParams = new URLSearchParams(window.location.search);
-//     let projectId = urlParams.get('project');
-//
-//     // Если в URL нет параметра, пробуем взять из sessionStorage
-//     if (!projectId) {
-//       projectId = sessionStorage.getItem('selectedProject');
-//     }
-//
-//     const projectsData = {
-//       charmstore: {
-//         title: "Charmstore Club",
-//         description: "At Charmstore Club, elegance meets confidence. A curated space for those who know luxury isn't loud — it's effortless. From timeless design to seamless experience, we built a digital boutique that speaks the language of modern charm. Style, simplicity, and sophistication — all in one click.",
-//         link: "https://charmstore.club/",
-//         images: [
-//           "./images/projects/project-1-2.png",
-//           "./images/projects/project-1.jpg",
-//           "./images/projects/project-1-1.png"
-//         ]
-//       },
-//       house: {
-//         title: "House of Rohl",
-//         description: "At House of Rohl, luxury flows without effort. We sculpted a digital experience where craftsmanship meets clarity, turning a microsite for their KBIS showcase into a curated journey of texture, finish, and elegance. From immersive visuals to sleek transitions, we made the space as refined as the fixtures themselves — tailored for those who expect quiet grandeur.",
-//         link: "https://houseofrohl-kbis.atypicdev.com/",
-//         images: [
-//           "./images/projects/project-2-1.png",
-//           "./images/projects/project-2.png",
-//           "./images/projects/project-2-2.png"
-//         ]
-//       },
-//       futureme: {
-//         title: "FutureMe",
-//         description: "At FutureMe, we built something simple yet powerful — a platform that lets you write a message to your future self and be sure it'll reach you, even 10 years from now. Clean design, reliable tech, and smooth delivery — proof that meaningful ideas don't need complexity to last.",
-//         link: "https://www.futureme.org/",
-//         images: [
-//           "./images/projects/project-3-1.png",
-//           "./images/projects/project-3.png",
-//           "./images/projects/project-3-2.png"
-//         ]
-//       },
-//       swap: {
-//         title: "Window Swap",
-//         description: "At Window Swap, we built a serene digital escape — a global window whose view changes every time. With seamless transitions and minimal design, users drift into peaceful scenes across the world. If you dreamed the web could pause and breathe, here it is.",
-//         link: "https://window-swap.com",
-//         images: [
-//           "./images/projects/project-4-1.png",
-//           "./images/projects/project-4.png",
-//           "./images/projects/project-4-2.png"
-//         ]
-//       },
-//       genoneai: {
-//         title: "GenOneAi",
-//         description: "At GenOneAI, we crafted a sleek digital interface that brings multiple AI tools under one roof. With streamlined navigation, intuitive flows and minimalist visuals, we turned complexity into clarity — so users can jump straight into outcomes, not onboarding. Designed by ApexStudios, built for those who demand instant access to next-level intelligence.",
-//         link: "https://www.figma.com/proto/kEOhvhSwDafPIhz1PE95sR/GenOneAI--MVP-?page-id=0%3A1&node-id=73-14&p=f&t=Lz394y3Ss5sHtw7B-1&scaling=scale-down&content-scaling=fixed",
-//         images: [
-//           "./images/projects/phone-1.png",
-//           "./images/projects/phone-2.png",
-//           "./images/projects/phone-3.png",
-//           "./images/projects/phone-4.png",
-//           "./images/projects/phone-5.png",
-//           "./images/projects/phone-6.png",
-//           "./images/projects/phone-7.png",
-//         ]
-//       },
-//       xuva: {
-//         title: "Xuva",
-//         description: "At Xuva, heritage flavours meet digital finesse. We crafted a responsive site for this Mexico City gem that echoes the spirit of Oaxaca — vibrant, refined and deeply rooted. With immersive visuals and polished UX, the experience invites visitors to step beyond a menu and into a curated world of taste, texture and culture. Luxury done quietly.",
-//         link: "https://xuva.mx/",
-//         images: [
-//           "./images/projects/project-5-1.png",
-//           "./images/projects/project-5.png",
-//           "./images/projects/project-5-2.png"
-//         ]
-//       },
-//     };
-//
-//     // Загружаем данные проекта
-//     if (projectId && projectsData[projectId]) {
-//       fillProjectSection(projectsData[projectId], projectId);
-//       sessionStorage.removeItem('selectedProject');
-//
-//       // Добавляем обработчик перезагрузки
-//       window.addEventListener('beforeunload', function() {
-//         sessionStorage.setItem('returnToIndex', 'true');
-//       });
-//     } else {
-//       // Если проект не найден или страница перезагружена - возвращаем на главную
-//       if (window.location.search === '' || sessionStorage.getItem('returnToIndex') === 'true') {
-//         sessionStorage.removeItem('returnToIndex');
-//         window.location.href = './index.html';
-//       }
-//       return;
-//     }
-//
-//     function fillProjectSection(data, projectKey) {
-//       // Обновляем заголовок страницы
-//       document.title = `${data.title} | ApexStudios`;
-//
-//       // Находим элементы по вашей структуре
-//       const title = document.querySelector('.projects__title');
-//       const desc = document.querySelector('.description__text');
-//       const link = document.querySelector('.projects__link');
-//       const wrapper = document.querySelector('.projects__inner .swiper-wrapper');
-//
-//       // Заполняем текстовые элементы
-//       if (title) title.textContent = data.title;
-//       if (desc) desc.textContent = data.description;
-//
-//       // Заполняем ссылку
-//       if (link) {
-//         link.href = data.link;
-//         link.target = "_blank";
-//
-//         if (projectKey === "genoneai") {
-//           link.textContent = "Link to Figma";
-//         } else {
-//           link.textContent = data.link;
-//         }
-//       }
-//
-//       // Заполняем слайды
-//       if (wrapper) {
-//         wrapper.innerHTML = '';
-//
-//         data.images.forEach(src => {
-//           const slideClass = projectKey === "genoneai" ? "genoneai__slide" : "projects__slide";
-//           const slide = document.createElement('div');
-//           slide.className = `content swiper-slide ${slideClass}`;
-//
-//           const img = document.createElement('img');
-//           img.src = src;
-//           img.alt = data.title;
-//           img.loading = "lazy";
-//
-//           slide.appendChild(img);
-//           wrapper.appendChild(slide);
-//         });
-//       }
-//
-//       // Добавляем специальный класс для genoneai
-//       const inner = document.querySelector('.projects__inner');
-//       if (inner) {
-//         if (projectKey === "genoneai") {
-//           inner.classList.add('genoneai');
-//         } else {
-//           inner.classList.remove('genoneai');
-//         }
-//       }
-//     }
-//   }
-// });
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  const isProjectsPage = window.location.pathname.includes('projects.html');
-  const isIndexPage = !isProjectsPage;
-
-  // Логика для главной страницы
-  if (isIndexPage) {
-    const portfolioLinks = document.querySelectorAll('.portfolio__slide');
-    portfolioLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const projectId = this.dataset.project;
-        sessionStorage.setItem('selectedProject', projectId);
-        window.location.href = `./projects.html?project=${projectId}`;
-      });
-    });
-  }
-
-  // Логика для страницы проекта
-  if (isProjectsPage) {
-    const urlParams = new URLSearchParams(window.location.search);
-    let projectId = urlParams.get('project');
-    if (!projectId) {
-      projectId = sessionStorage.getItem('selectedProject');
-    }
-
-    const projectsData = {
-      charmstore: {
-        title: "Charmstore Club",
-        description: "At Charmstore Club, elegance meets confidence. A curated space for those who know luxury isn't loud — it's effortless. From timeless design to seamless experience, we built a digital boutique that speaks the language of modern charm. Style, simplicity, and sophistication — all in one click.",
-        link: "https://charmstore.club/",
-        images: [
-          "./images/projects/project-1-2.png",
-          "./images/projects/project-1.jpg",
-          "./images/projects/project-1-1.png"
-        ]
-      },
-      house: {
-        title: "House of Rohl",
-        description: "At House of Rohl, luxury flows without effort. We sculpted a digital experience where craftsmanship meets clarity, turning a microsite for their KBIS showcase into a curated journey of texture, finish, and elegance. From immersive visuals to sleek transitions, we made the space as refined as the fixtures themselves — tailored for those who expect quiet grandeur.",
-        link: "https://houseofrohl-kbis.atypicdev.com/",
-        images: [
-          "./images/projects/project-2-1.png",
-          "./images/projects/project-2.png",
-          "./images/projects/project-2-2.png"
-        ]
-      },
-      futureme: {
-        title: "FutureMe",
-        description: "At FutureMe, we built something simple yet powerful — a platform that lets you write a message to your future self and be sure it'll reach you, even 10 years from now. Clean design, reliable tech, and smooth delivery — proof that meaningful ideas don't need complexity to last.",
-        link: "https://www.futureme.org/",
-        images: [
-          "./images/projects/project-3-1.png",
-          "./images/projects/project-3.png",
-          "./images/projects/project-3-2.png"
-        ]
-      },
-      swap: {
-        title: "Window Swap",
-        description: "At Window Swap, we built a serene digital escape — a global window whose view changes every time. With seamless transitions and minimal design, users drift into peaceful scenes across the world. If you dreamed the web could pause and breathe, here it is.",
-        link: "https://window-swap.com",
-        images: [
-          "./images/projects/project-4-1.png",
-          "./images/projects/project-4.png",
-          "./images/projects/project-4-2.png"
-        ]
-      },
-      genoneai: {
-        title: "GenOneAi",
-        description: "At GenOneAI, we crafted a sleek digital interface that brings multiple AI tools under one roof. With streamlined navigation, intuitive flows and minimalist visuals, we turned complexity into clarity — so users can jump straight into outcomes, not onboarding. Designed by ApexStudios, built for those who demand instant access to next-level intelligence.",
-        link: "https://www.figma.com/proto/kEOhvhSwDafPIhz1PE95sR/GenOneAI--MVP-?page-id=0%3A1&node-id=73-14&p=f&t=Lz394y3Ss5sHtw7B-1&scaling=scale-down&content-scaling=fixed",
-        images: [
-          "./images/projects/phone-1.png",
-          "./images/projects/phone-2.png",
-          "./images/projects/phone-3.png",
-          "./images/projects/phone-4.png",
-          "./images/projects/phone-5.png",
-          "./images/projects/phone-6.png",
-          "./images/projects/phone-7.png",
-        ]
-      },
-      xuva: {
-        title: "Xuva",
-        description: "At Xuva, heritage flavours meet digital finesse. We crafted a responsive site for this Mexico City gem that echoes the spirit of Oaxaca — vibrant, refined and deeply rooted. With immersive visuals and polished UX, the experience invites visitors to step beyond a menu and into a curated world of taste, texture and culture. Luxury done quietly.",
-        link: "https://xuva.mx/",
-        images: [
-          "./images/projects/project-5-1.png",
-          "./images/projects/project-5.png",
-          "./images/projects/project-5-2.png"
-        ]
-      },
-    };
-
-    if (projectId && projectsData[projectId]) {
-      fillProjectSection(projectsData[projectId], projectId);
-      sessionStorage.removeItem('selectedProject');
-
-      window.addEventListener('beforeunload', function() {
-        sessionStorage.setItem('returnToIndex', 'true');
-      });
-    } else {
-      if (window.location.search === '' || sessionStorage.getItem('returnToIndex') === 'true') {
-        sessionStorage.removeItem('returnToIndex');
-        window.location.href = './index.html';
-      }
-      return;
-    }
-
-    function fillProjectSection(data, projectKey) {
-      document.title = `${data.title} | ApexStudios`;
-
-      const title = document.querySelector('.projects__title');
-      const desc = document.querySelector('.description__text');
-      const link = document.querySelector('.projects__link');
-      const wrapper = document.querySelector('.projects__inner .swiper-wrapper');
-
-      if (title) title.textContent = data.title;
-      if (desc) desc.textContent = data.description;
-
-      if (link) {
-        link.href = data.link;
-        link.target = "_blank";
-        link.textContent = projectKey === "genoneai" ? "Link to Figma" : data.link;
-      }
-
-      if (wrapper) {
-        wrapper.innerHTML = '';
-        data.images.forEach(src => {
-          const slideClass = projectKey === "genoneai" ? "genoneai__slide" : "projects__slide";
-          const slide = document.createElement('div');
-          slide.className = `content swiper-slide ${slideClass}`;
-
-          const img = document.createElement('img');
-          img.src = src;
-          img.alt = data.title;
-          img.loading = "lazy";
-          img.width = 1215;
-          img.height = 788;
-
-          slide.appendChild(img);
-          wrapper.appendChild(slide);
-        });
-      }
-
-      const inner = document.querySelector('.projects__inner');
-      if (inner) {
-        inner.classList.toggle('genoneai', projectKey === "genoneai");
-      }
-    }
-  }
-});
 
 
 
