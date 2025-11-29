@@ -13,6 +13,11 @@
     padding-bottom: 30px;
   }
 
+  &__slide {
+    max-width: rem(1215);
+    width: 84vw;
+  }
+
   &__collection {
   }
 
@@ -25,12 +30,6 @@
     font-weight: 500;
   }
 
-  &__slide {
-      max-width: rem(1215);
-      width: 84vw;
-  }
-
-
   &__description {
     display: grid;
     row-gap: rem(17);
@@ -39,8 +38,4 @@
   &__link {
     margin-top: rem(20);
   }
-}
-
-.projects {
-  display: none;
 }

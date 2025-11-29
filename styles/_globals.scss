@@ -15,7 +15,7 @@ body {
   background-repeat: no-repeat;
   background-color: var(--color-bg-main);
 
-  &:has(.projects.projects-active) {
+  &:has(.projects) {
     background-image: none;
     background-color: var(--color-bg-main);
   }

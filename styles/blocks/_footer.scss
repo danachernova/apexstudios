@@ -20,7 +20,6 @@
   &__link {
   }
   &_contacts {
-    font-size: fluid(14,20);
     white-space: nowrap;
     padding-bottom: rem(25);
     display: grid;
@@ -38,7 +37,6 @@
         text-shadow:
           0 0 1px var(--color-light-d2),
           0 0 3px var(--color-light-d2);
-        scale: 1.1;
       }
     }
   }
