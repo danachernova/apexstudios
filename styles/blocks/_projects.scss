@@ -11,17 +11,12 @@
   &__inner {
     position: relative;
     padding-bottom: 30px;
+    width: 100vw;
   }
 
   &__slide {
     max-width: rem(1215);
     width: 84vw;
-  }
-
-  &__collection {
-  }
-
-  &__pagination {
   }
 
   &__title {

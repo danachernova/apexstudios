@@ -2,14 +2,23 @@
 
 
 .about {
-    padding-bottom: fluid(100, 176);
+    padding-bottom: rem(100);
+    @include mobile {
+      padding-bottom: rem(50);
+    }
   &__inner {
   }
   &__title {
     font-size: fluid(40,64);
     text-wrap: nowrap;
     letter-spacing: -0.04em;
-    padding-block: rem(52);
+
+    &:not(:last-child){
+      padding-bottom: rem(52);
+      @include mobile {
+        padding-bottom: rem(30);
+      }
+    }
   }
   &__list {
     display: grid;

@@ -1,11 +1,11 @@
 //header height
-function updateHeaderHeight() {
-  const header = document.querySelector('.header')
-  document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`)
-}
-
-window.addEventListener('load', updateHeaderHeight)
-window.addEventListener('resize', updateHeaderHeight)
+// function updateHeaderHeight() {
+//   const header = document.querySelector('.header')
+//   document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`)
+// }
+//
+// window.addEventListener('load', updateHeaderHeight)
+// window.addEventListener('resize', updateHeaderHeight)
 
 //swiper
 function initSwiper(selector, enableAutoplay = true) {
@@ -15,8 +15,9 @@ function initSwiper(selector, enableAutoplay = true) {
     centeredSlides: true,
     loop: true,
     slidesPerView: "auto",
-    spaceBetween: -100,
+    spaceBetween: 0,
     speed: 600,
+
     simulateTouch: true,
     coverflowEffect: {
       rotate: 0,
@@ -78,13 +79,12 @@ function initSwiper(selector, enableAutoplay = true) {
       }
     });
   }
-
   return swiper;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   if (document.querySelector('.portfolio__inner')) {
-    initSwiper('.portfolio__inner');
+    initSwiper('.portfolio__inner', false);
   }
   if (document.querySelector('.projects__inner')) {
     setTimeout(() => {

@@ -12,8 +12,8 @@
   @include tablet {
     row-gap: rem(25);
   }
-
-  &__collection {
+  @include mobile {
+    margin-block: rem(40);
   }
 
   &__inner {
@@ -21,19 +21,38 @@
     padding-bottom: 30px;
   }
 
+  &__swiper-wrapper {
+  }
+
+
+  &__slide {
+    max-width: 40vw;
+
+    & img {
+      border-radius: 30px;
+    }
+
+    @include mobile {
+      max-width: 42vw;
+    }
+  }
+
 
   &__title {
     font-size: fluid(30,64);
     letter-spacing: -0.04em;
   }
+}
 
-  &__slide {
-    max-width: 40vw;
-    width: 100%;
-    aspect-ratio: 1/1.5;
+.portfolio__inner {
+  pointer-events: none;
+}
 
-    @include tablet-above {
-      max-width: 30vw;
-    }
-  }
+.portfolio__inner .swiper-slide {
+  pointer-events: auto;
+}
+
+.portfolio__inner .swiper-pagination,
+.portfolio__inner .swiper-pagination-bullet {
+  pointer-events: auto !important;
 }

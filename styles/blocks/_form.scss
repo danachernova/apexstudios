@@ -3,7 +3,7 @@
   .form {
     position: relative;
 
-    min-height: 100dvh;
+    padding-block: fluid(40,120);
     height: 100%;
     font-size: fluid(20,48);
     display: grid;
@@ -13,7 +13,7 @@
     &::before {
       content: "CONTACT US CONTACT US CONTACT US CONTACT US";
       position: absolute;
-      inset: 0;
+      top: 0;
       transform: translateX(-25%);
       font-size: fluid(40,120);
       font-weight: 600;
@@ -34,7 +34,7 @@
 
 
     &__list {
-      padding-block: rem(55);
+      padding-block: 10dvh;
       @include flex-center();
       flex-direction: column;
       row-gap: rem(12);

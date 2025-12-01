@@ -1,26 +1,20 @@
 @use '../helpers' as *;
 
 .collection {
-  @include flex-center();
-  .swiper {
-    width: 100vw;
-  }
-
-  .swiper-slide {
-  }
 
   .content {
-    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
 
     img {
       width: 100%;
-      height: 100%;
+      height: auto;
+      max-height: 100%;
       border-radius: 30px;
-      filter: brightness(0.4);
-      transition: filter var(--transition-duration) ease;
     }
   }
 }
+
+
+

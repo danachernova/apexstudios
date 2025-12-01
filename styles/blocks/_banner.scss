@@ -2,8 +2,11 @@
 
 .banner {
   position: relative;
-  padding-block: rem(100);
-  min-height: calc(100dvh - var(--header-height));
+  padding-block: rem(120);
+
+@include mobile {
+  padding-block: rem(60);
+}
 
  &__main {
    display: flex;

@@ -11,14 +11,13 @@
 @use 'blocks/banner';
 @use 'blocks/about';
 
+@use 'blocks/swiper';
+@use 'blocks/collection';
+@use 'blocks/portfolio';
+
 @use 'blocks/description';
 @use 'blocks/genoneai';
 @use 'blocks/projects';
-
-@use 'blocks/swiper';
-
-@use 'blocks/portfolio';
-@use 'blocks/collection';
 
 @use 'blocks/form';
 
