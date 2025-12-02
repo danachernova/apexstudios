@@ -74,11 +74,11 @@ function initSwiper(selector, enableAutoplay = true) {
 
 document.addEventListener('DOMContentLoaded', function() {
   if (document.querySelector('.portfolio__inner')) {
-    initSwiper('.portfolio__inner', false);
+    initSwiper('.portfolio__inner');
   }
   if (document.querySelector('.projects__inner')) {
     setTimeout(() => {
-      initSwiper('.projects__inner', false);
+      initSwiper('.projects__inner');
     }, 100);
   }
 });
