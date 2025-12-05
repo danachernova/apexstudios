@@ -3,7 +3,11 @@
 .banner {
   position: relative;
   height: calc(100dvh - var(--header-height) - 20px);
-  padding-block: fluid(50,100);
+  padding-block: rem(100);
+
+  @include mobile {
+    padding-bottom: rem(150);
+  }
 
  &__main {
    display: flex;
@@ -17,7 +21,6 @@
     flex-direction: column;
     flex-grow: 1;
     row-gap: fluid(16,54);
-    max-width: rem(1045);
     max-width: fluid(250,1054);
     letter-spacing: -0.04em;
     color: var(--color-accent);

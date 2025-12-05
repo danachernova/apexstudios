@@ -13,6 +13,13 @@
   @include tablet {
     row-gap: rem(25);
   }
+  @include mobile {
+    padding-block: rem(50);
+  }
+
+  &__collection {
+    width: 100vw;
+  }
 
   &__inner {
     position: relative;
@@ -26,7 +33,7 @@
   &__slide {
     max-width: 30vw;
     @include tablet {
-      max-width: 50vw;
+      max-width: 60vw;
     }
     @include mobile-s {
       max-width: 75vw;

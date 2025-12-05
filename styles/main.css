@@ -471,7 +471,12 @@ a[class] {
 .banner {
   position: relative;
   height: calc(100dvh - var(--header-height) - 20px);
-  padding-block: clamp(3.125rem, 1.582278481rem + 6.3291139241vw, 6.25rem);
+  padding-block: 6.25rem;
+}
+@media (width <= 47.99875rem) {
+  .banner {
+    padding-bottom: 9.375rem;
+  }
 }
 .banner__main {
   display: flex;
@@ -485,7 +490,6 @@ a[class] {
   flex-direction: column;
   flex-grow: 1;
   row-gap: clamp(1rem, -0.1724683544rem + 4.8101265823vw, 3.375rem);
-  max-width: 65.3125rem;
   max-width: clamp(15.625rem, -9.1819620253rem + 101.7721518987vw, 65.875rem);
   letter-spacing: -0.04em;
   color: var(--color-accent);
@@ -518,7 +522,7 @@ a[class] {
 }
 
 .about {
-  margin-block: clamp(6.25rem, 7.4841772152rem + -5.0632911392vw, 3.75rem);
+  margin-block: clamp(3.125rem, 1.582278481rem + 6.3291139241vw, 6.25rem);
 }
 .about__title {
   font-size: clamp(2.5rem, 1.7594936709rem + 3.0379746835vw, 4rem);
@@ -652,6 +656,14 @@ a[class] {
     row-gap: 1.5625rem;
   }
 }
+@media (width <= 47.99875rem) {
+  .portfolio {
+    padding-block: 3.125rem;
+  }
+}
+.portfolio__collection {
+  width: 100vw;
+}
 .portfolio__inner {
   position: relative;
   padding-bottom: 30px;
@@ -661,7 +673,7 @@ a[class] {
 }
 @media (width <= 58.81125rem) {
   .portfolio__slide {
-    max-width: 50vw;
+    max-width: 60vw;
   }
 }
 @media (width <= 34.43625rem) {
@@ -787,7 +799,6 @@ a[class] {
   height: 100%;
   font-size: clamp(1.25rem, 0.3860759494rem + 3.5443037975vw, 3rem);
   display: grid;
-  min-height: 100dvh;
   z-index: 100;
 }
 .form::before {
