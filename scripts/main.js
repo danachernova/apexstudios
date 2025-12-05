@@ -25,14 +25,16 @@ function initSwiper(selector, enableAutoplay = true) {
         updateSlideBrightness(this);
 
         requestAnimationFrame(() => {
-          const origSlides = Array.from(this.slides).filter(s => !s.classList.contains('swiper-slide-duplicate'));
-          const totalOriginal = origSlides.length;
+            const origSlides = Array.from(this.slides).filter(s => !s.classList.contains('swiper-slide-duplicate'));
 
-          if (totalOriginal > 0) {
-            const centerIndex = Math.floor(totalOriginal / 2);
-            this.slideToLoop(centerIndex, 0, false);
-          }
-          updateSlideBrightness(this);
+            const totalOriginal = origSlides.length;
+
+            if (totalOriginal > 0) {
+              const centerIndex = Math.floor(totalOriginal / 2);
+              this.slideToLoop(centerIndex, 0, false);
+            }
+
+            updateSlideBrightness(this);
         });
       },
       slideChangeTransitionStart() {
@@ -73,10 +75,11 @@ document.addEventListener('DOMContentLoaded', function() {
     initSwiper('.portfolio__inner');
   }
   if (document.querySelector('.projects__inner')) {
-    initSwiper('.projects__inner');
+    setTimeout(() => {
+      initSwiper('.projects__inner');
+    }, 100);
   }
 });
-
 
 //модалки
 
