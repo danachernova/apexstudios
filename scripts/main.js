@@ -25,18 +25,14 @@ function initSwiper(selector, enableAutoplay = true) {
         updateSlideBrightness(this);
 
         requestAnimationFrame(() => {
-          setTimeout(() => {
-            const origSlides = Array.from(this.slides).filter(s => !s.classList.contains('swiper-slide-duplicate'));
+          const origSlides = Array.from(this.slides).filter(s => !s.classList.contains('swiper-slide-duplicate'));
+          const totalOriginal = origSlides.length;
 
-            const totalOriginal = origSlides.length;
-
-            if (totalOriginal > 0) {
-              const centerIndex = Math.floor(totalOriginal / 2);
-              this.slideToLoop(centerIndex, 0, false);
-            }
-
-            updateSlideBrightness(this);
-          }, 30);
+          if (totalOriginal > 0) {
+            const centerIndex = Math.floor(totalOriginal / 2);
+            this.slideToLoop(centerIndex, 0, false);
+          }
+          updateSlideBrightness(this);
         });
       },
       slideChangeTransitionStart() {
@@ -77,9 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSwiper('.portfolio__inner');
   }
   if (document.querySelector('.projects__inner')) {
-    setTimeout(() => {
-      initSwiper('.projects__inner');
-    }, 100);
+    initSwiper('.projects__inner');
   }
 });
 
@@ -239,6 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const steps = document.querySelectorAll('.form-step');
 const nextButtons = document.querySelectorAll('.next-button');
 const progressBar = document.querySelector('.form__progress-bar');
+const progressContainer = document.querySelector('.form__progress');
 
 const totalSteps = steps.length;
 let currentStep = 1;
@@ -254,10 +249,25 @@ function updateSteps(step) {
   updateProgress(step);
 }
 
+// function updateProgress(step) {
+//   const percentage = (step - 1) / (totalSteps - 1) * 100;
+//   progressBar.style.width = percentage + '%';
+// }
+
 function updateProgress(step) {
-  const percentage = (step - 1) / (totalSteps - 1) * 100;
-  progressBar.style.width = percentage + '%';
+  const activeStep = document.querySelector(`.form-step[data-step="${step}"]`);
+
+  if (activeStep && activeStep.dataset.hideProgress === "true") {
+    if (progressBar) progressBar.style.width = '0%';
+    if (progressContainer) progressContainer.style.opacity = '0';
+    return;
+  }
+  const percentage = (step - 1) / (totalSteps - 2) * 100;
+  if (progressBar) progressBar.style.width = percentage + '%';
+  if (progressContainer) progressContainer.style.opacity = '1';
 }
+
+
 nextButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     const next = Number(btn.dataset.next);
@@ -302,42 +312,49 @@ document.querySelectorAll('.form__socials').forEach(block => {
   });
 });
 
+// function progressbarUpdate() {
+//   const progressBar = document.querySelector('.form__progress-bar');
+//   const progressContainer = document.querySelector('.form__progress');
+//   const steps = document.querySelectorAll('.form-step');
+//   const totalSteps = steps.length;
+//   const stepPercent = 100 / totalSteps;
+//
+//   if (!progressBar || !progressContainer || !steps.length) return;
+//
+//   const originalUpdateSteps = window.updateSteps;
+//   window.updateSteps = function(step) {
+//     if (typeof originalUpdateSteps === 'function') {
+//       originalUpdateSteps(step);
+//     }
+//     updateProgressBar(step);
+//   };
+//
+//   function updateProgressBar(step) {
+//     if (step === totalSteps) {
+//       progressContainer.style.opacity = '0';
+//       progressBar.style.width = '0';
+//       return;
+//     }
+//     progressContainer.style.opacity = '1';
+//     progressBar.style.width = (stepPercent * step) + '%';
+//   }
+//
+//   updateProgressBar(1);
+//
+//   const nextButtons = document.querySelectorAll('.next-button');
+//   nextButtons.forEach(btn => {
+//     btn.addEventListener('click', () => {
+//       const nextStep = Number(btn.dataset.next);
+//       updateProgressBar(nextStep);
+//     });
+//   });
+// }
+//
+// progressbarUpdate()
+
 function progressbarUpdate() {
-  const progressBar = document.querySelector('.form__progress-bar');
-  const progressContainer = document.querySelector('.form__progress');
-  const steps = document.querySelectorAll('.form-step');
-  const totalSteps = steps.length;
-  const stepPercent = 100 / totalSteps;
-
-  if (!progressBar || !progressContainer || !steps.length) return;
-
-  const originalUpdateSteps = window.updateSteps;
-  window.updateSteps = function(step) {
-    if (typeof originalUpdateSteps === 'function') {
-      originalUpdateSteps(step);
-    }
-    updateProgressBar(step);
-  };
-
-  function updateProgressBar(step) {
-    if (step === totalSteps) {
-      progressContainer.style.opacity = '0';
-      progressBar.style.width = '0';
-      return;
-    }
-    progressContainer.style.opacity = '1';
-    progressBar.style.width = (stepPercent * step) + '%';
-  }
-
-  updateProgressBar(1);
-
-  const nextButtons = document.querySelectorAll('.next-button');
-  nextButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const nextStep = Number(btn.dataset.next);
-      updateProgressBar(nextStep);
-    });
-  });
+  if (!progressBar || !progressContainer) return;
+  updateProgress(1);
 }
 
 progressbarUpdate()
@@ -374,9 +391,12 @@ if (formElement) {
     e.preventDefault(); // форма не отправляется на сервер, здесь шаманит Ваня, объект json в консоли
     const dataToSend = getFormData();
     console.log('Ваня, лови данные', JSON.stringify(dataToSend, null, 2));
-    setTimeout(() => location.reload(), 0);
+
+    currentStep = steps.length;
+    updateSteps(currentStep);
   });
 }
+
 
 
 

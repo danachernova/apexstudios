@@ -8,6 +8,8 @@
     font-size: fluid(20,48);
     display: grid;
 
+    min-height: 100dvh;
+
     z-index: 100;
 
     &::before {
@@ -29,6 +31,10 @@
         left: 50%;
         transform: translateX(-50%);
       }
+
+      @include mobile-s {
+        display: none;
+      }
     }
 
 
@@ -38,6 +44,8 @@
       @include flex-center();
       flex-direction: column;
       row-gap: rem(12);
+
+      z-index: 100;
     }
     &__slider {
     }
@@ -89,6 +97,7 @@
         color: var(--color-light-d1);
         opacity: 30%;
       }
+
     }
 
     &__next-btn {
@@ -243,7 +252,7 @@
       }
     }
 
-&__progress {
+    &__progress {
   width: rem(40);
   height: rem(6);
   background-color: #091520;
@@ -261,6 +270,9 @@
     transition-duration: var(--transition-duration);
   }
 }
+    &__success {
+      font-size: fluid(16,30);
+    }
   }
 
 

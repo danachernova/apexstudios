@@ -2,7 +2,8 @@
 
 .portfolio {
   position: relative;
-  margin-block: rem(100);
+  padding-block: rem(100);
+  margin-bottom: rem(40);
   user-select: none;
 
   @include flex-center();
@@ -11,9 +12,6 @@
 
   @include tablet {
     row-gap: rem(25);
-  }
-  @include mobile {
-    margin-block: rem(40);
   }
 
   &__inner {
@@ -26,14 +24,16 @@
 
 
   &__slide {
-    max-width: 40vw;
+    max-width: 30vw;
+    @include tablet {
+      max-width: 50vw;
+    }
+    @include mobile-s {
+      max-width: 75vw;
+    }
 
     & img {
       border-radius: 30px;
-    }
-
-    @include mobile {
-      max-width: 42vw;
     }
   }
 

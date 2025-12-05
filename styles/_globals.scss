@@ -3,17 +3,23 @@
 body {
   @include fluid-text(16, 20);
 
+  padding-top: fluid(10,20);
+
   display: flex;
   flex-direction: column;
 
   font-family: var(--font-family-base);
   color: var(--color-light-d1);
 
-  background-image: url(../images/bg-main.png);
+  background-image: url(../images/bg-main.svg);
   background-size: 100% auto;
   background-position: 0 0;
   background-repeat: no-repeat;
   background-color: var(--color-bg-main);
+
+  @include mobile {
+    background-size: 150% auto;
+  }
 
   &:has(.projects) {
     background-image: none;

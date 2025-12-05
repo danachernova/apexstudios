@@ -2,30 +2,25 @@
 
 .banner {
   position: relative;
-  padding-block: rem(120);
-
-@include mobile {
-  padding-block: rem(60);
-}
+  height: calc(100dvh - var(--header-height) - 20px);
+  padding-block: fluid(50,100);
 
  &__main {
    display: flex;
    flex-direction: column;
    justify-content: space-between;
    row-gap: rem(50);
+   height: 100%;
  }
   &__body{
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    row-gap: fluid(34,54);
+    row-gap: fluid(16,54);
     max-width: rem(1045);
+    max-width: fluid(250,1054);
     letter-spacing: -0.04em;
     color: var(--color-accent);
-
-    @include tablet {
-      row-gap: rem(34);
-    }
   }
 
   &__title {
@@ -37,7 +32,7 @@
     display: inline-block;
     max-width: rem(530);
     line-height: 1.3;
-    font-size: fluid(25,36);
+    font-size: fluid(16,36);
 
     @include mobile-s {
       font-size: rem(20);
@@ -46,8 +41,9 @@
 
   &__contact-us {
     max-width: rem(200);
+    height: rem(74);
     margin-inline: auto;
-   margin-top: auto;
+    margin-top: auto;
   }
 }
 

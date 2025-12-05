@@ -6,6 +6,7 @@
 
 @use 'blocks/logo';
 @use 'blocks/header';
+
 @use 'blocks/button';
 @use 'blocks/clouds';
 @use 'blocks/banner';
@@ -19,6 +20,7 @@
 @use 'blocks/genoneai';
 @use 'blocks/projects';
 
+@use 'blocks/form-gradient';
 @use 'blocks/form';
 
 @use 'blocks/footer';

@@ -25,12 +25,6 @@
     display: grid;
     row-gap: rem(5);
 
-    @include mobile-above {
-      grid-template-columns: repeat(3, 1fr);
-      column-gap: 5vw;
-      padding-bottom: rem(50);
-    }
-
     & a {
       @include hover {
         color: var(--color-light-d2);

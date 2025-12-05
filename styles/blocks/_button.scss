@@ -14,10 +14,6 @@
     border-radius: 200px;
     padding: rem(20) rem(35);
 
-    @include mobile {
-      padding: rem(10) rem(25);
-    }
-
     @include hover {
       box-shadow:
         0 0 5px var(--color-light-d2),

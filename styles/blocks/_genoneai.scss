@@ -2,7 +2,7 @@
 
 .projects__inner.genoneai {
   position: relative;
-  padding-bottom: 30px;
+  padding-bottom: 40px;
   display: flex;
   justify-content: center;
 
@@ -21,7 +21,7 @@
     aspect-ratio: 1/1.8;
 
     @include tablet-above {
-      max-width: 30vw;
+      max-width: 25vw;
     }
   }
 }
