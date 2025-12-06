@@ -5,6 +5,8 @@ function initSwiper(selector, enableAutoplay = true) {
     centeredSlides: true,
     loop: true,
     slidesPerView: "auto",
+    slidesOffsetAfter: 0,
+    slidesOffsetBefore: 0,
     spaceBetween: 0,
     speed: 600,
 

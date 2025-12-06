@@ -578,6 +578,10 @@ a[class] {
   font-weight: 600;
 }
 
+.swiper-wrapper {
+  min-width: 100vw;
+}
+
 .swiper-slide-active .content img {
   filter: brightness(1) !important;
 }
