@@ -400,6 +400,24 @@ if (formElement) {
   });
 }
 
+//animation
+
+// const observer = new IntersectionObserver((entries) => {
+//   entries.forEach(entry => {
+//     if (entry.isIntersecting) {
+//       entry.target.classList.add("visible");
+//       observer.unobserve(entry.target); // чтобы анимация не повторялась
+//     }
+//   });
+// }, {
+//   threshold: 0.15
+// });
+//
+// // Подключаем ко всем секциям
+// document.querySelectorAll("section").forEach(section => {
+//   section.classList.add("section-anim");
+//   observer.observe(section);
+// });
 
 
 
