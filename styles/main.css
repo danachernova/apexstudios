@@ -219,6 +219,11 @@ textarea {
   --header-height: 3.5rem;
   --transition-duration: 0.2s;
 }
+@media (width > 73.81125rem) {
+  :root {
+    --container-width: 90rem;
+  }
+}
 
 .container {
   max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
@@ -589,7 +594,7 @@ a[class] {
 }
 
 .swiper-wrapper {
-  min-width: 100vw;
+  width: 100vw;
 }
 
 .swiper-slide-active .content img {
@@ -951,7 +956,7 @@ a[class] {
   align-items: center;
   transition-duration: var(--transition-duration);
 }
-.form__socials-item[data-value=telegram] svg {
+.form__socials-item[data-value=telegram] svg, .form__socials-item[data-value=email] svg {
   scale: 1.1;
 }
 .form__socials-item[data-value=whatsapp] {

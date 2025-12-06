@@ -155,7 +155,8 @@
         align-items: center;
         transition-duration: var(--transition-duration);
 
-      &[data-value="telegram"] svg{
+      &[data-value="telegram"] svg,
+      &[data-value="email"] svg, {
         scale: 1.1;
       }
         &[data-value="whatsapp"] {
