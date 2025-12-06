@@ -547,10 +547,10 @@ a[class] {
   }
 }
 .about__item {
+  z-index: 100;
   position: relative;
   display: grid;
   row-gap: 0.625rem;
-  background: rgba(209, 233, 254, 0.02);
   border-radius: 40px;
   font-size: clamp(1.375rem, 1.0664556962rem + 1.2658227848vw, 2rem);
   padding: 2.25rem 3.125rem;
@@ -573,6 +573,16 @@ a[class] {
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
+}
+.about__item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: rgba(209, 233, 254, 0.02);
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+  border-radius: inherit;
 }
 .about__item-title {
   font-weight: 600;
@@ -933,10 +943,19 @@ a[class] {
   cursor: pointer;
 }
 .form__socials-item {
+  width: 34px;
+  height: 28px;
   color: #505B61;
   display: flex;
   justify-content: center;
+  align-items: center;
   transition-duration: var(--transition-duration);
+}
+.form__socials-item[data-value=telegram] svg {
+  scale: 1.1;
+}
+.form__socials-item[data-value=whatsapp] {
+  margin-right: -2px;
 }
 .form__socials-item.active {
   color: var(--color-light-d1);

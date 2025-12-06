@@ -254,11 +254,6 @@ function updateSteps(step) {
   updateProgress(step);
 }
 
-// function updateProgress(step) {
-//   const percentage = (step - 1) / (totalSteps - 1) * 100;
-//   progressBar.style.width = percentage + '%';
-// }
-
 function updateProgress(step) {
   const activeStep = document.querySelector(`.form-step[data-step="${step}"]`);
 
@@ -317,46 +312,6 @@ document.querySelectorAll('.form__socials').forEach(block => {
   });
 });
 
-// function progressbarUpdate() {
-//   const progressBar = document.querySelector('.form__progress-bar');
-//   const progressContainer = document.querySelector('.form__progress');
-//   const steps = document.querySelectorAll('.form-step');
-//   const totalSteps = steps.length;
-//   const stepPercent = 100 / totalSteps;
-//
-//   if (!progressBar || !progressContainer || !steps.length) return;
-//
-//   const originalUpdateSteps = window.updateSteps;
-//   window.updateSteps = function(step) {
-//     if (typeof originalUpdateSteps === 'function') {
-//       originalUpdateSteps(step);
-//     }
-//     updateProgressBar(step);
-//   };
-//
-//   function updateProgressBar(step) {
-//     if (step === totalSteps) {
-//       progressContainer.style.opacity = '0';
-//       progressBar.style.width = '0';
-//       return;
-//     }
-//     progressContainer.style.opacity = '1';
-//     progressBar.style.width = (stepPercent * step) + '%';
-//   }
-//
-//   updateProgressBar(1);
-//
-//   const nextButtons = document.querySelectorAll('.next-button');
-//   nextButtons.forEach(btn => {
-//     btn.addEventListener('click', () => {
-//       const nextStep = Number(btn.dataset.next);
-//       updateProgressBar(nextStep);
-//     });
-//   });
-// }
-//
-// progressbarUpdate()
-
 function progressbarUpdate() {
   if (!progressBar || !progressContainer) return;
   updateProgress(1);
@@ -401,25 +356,6 @@ if (formElement) {
     updateSteps(currentStep);
   });
 }
-
-//animation
-
-// const observer = new IntersectionObserver((entries) => {
-//   entries.forEach(entry => {
-//     if (entry.isIntersecting) {
-//       entry.target.classList.add("visible");
-//       observer.unobserve(entry.target); // чтобы анимация не повторялась
-//     }
-//   });
-// }, {
-//   threshold: 0.15
-// });
-//
-// // Подключаем ко всем секциям
-// document.querySelectorAll("section").forEach(section => {
-//   section.classList.add("section-anim");
-//   observer.observe(section);
-// });
 
 
 

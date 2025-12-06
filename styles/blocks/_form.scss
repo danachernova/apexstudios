@@ -147,10 +147,20 @@
       column-gap: rem(25);
       cursor: pointer;
       &-item {
+        width: 34px;
+        height: 28px;
         color: #505B61;
         display: flex;
         justify-content: center;
+        align-items: center;
         transition-duration: var(--transition-duration);
+
+      &[data-value="telegram"] svg{
+        scale: 1.1;
+      }
+        &[data-value="whatsapp"] {
+          margin-right: -2px;
+        }
 
         &.active {
           color: var(--color-light-d1);
