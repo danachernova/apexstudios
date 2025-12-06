@@ -901,6 +901,7 @@ a[class] {
   font-size: clamp(1rem, 0.753164557rem + 1.0126582278vw, 1.5rem);
   padding-block: 0.625rem;
   padding-left: 1.5rem;
+  padding-right: 2.8125rem;
   width: 100%;
   height: 3.25rem;
   border-radius: 1.625rem;
@@ -966,6 +967,7 @@ a[class] {
   color: var(--color-light-d1);
 }
 .form__text {
+  display: flex;
   row-gap: 0.75rem;
   max-width: 43.75rem;
   max-height: 18.75rem;
