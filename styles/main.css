@@ -477,6 +477,7 @@ a[class] {
 .banner {
   position: relative;
   padding-block: 6.25rem;
+  height: 100dvh;
 }
 .banner__main {
   display: flex;
@@ -1157,6 +1158,7 @@ a[class] {
 }
 
 .footer {
+  background-color: var(--color-bg-main);
   padding-block: 1.375rem;
   font-size: 0.875rem;
   font-weight: 100;
@@ -1174,9 +1176,9 @@ a[class] {
   align-items: center;
 }
 .footer_contacts {
+  display: grid;
   white-space: nowrap;
   padding-bottom: 1.5625rem;
-  display: grid;
   row-gap: 0.3125rem;
 }
 @media (any-hover: hover) {

@@ -9,7 +9,6 @@ function initSwiper(selector, enableAutoplay = true) {
     slidesOffsetBefore: 0,
     spaceBetween: 0,
     speed: 600,
-
     simulateTouch: true,
     coverflowEffect: {
       rotate: 0,
@@ -114,9 +113,9 @@ document.addEventListener('DOMContentLoaded', function() {
         description: "At Charmstore Club, elegance meets confidence. A curated space for those who know luxury isn't loud — it's effortless. From timeless design to seamless experience, we built a digital boutique that speaks the language of modern charm. Style, simplicity, and sophistication — all in one click.",
         link: "https://charmstore.club/",
         images: [
-          "./images/projects/project-1-2.png",
-          "./images/projects/project-1.jpg",
-          "./images/projects/project-1-1.png"
+          "./images/projects/project-1-2.webp",
+          "./images/projects/project-1.webp",
+          "./images/projects/project-1-1.webp"
         ]
       },
       house: {
@@ -124,9 +123,9 @@ document.addEventListener('DOMContentLoaded', function() {
         description: "At House of Rohl, luxury flows without effort. We sculpted a digital experience where craftsmanship meets clarity, turning a microsite for their KBIS showcase into a curated journey of texture, finish, and elegance. From immersive visuals to sleek transitions, we made the space as refined as the fixtures themselves — tailored for those who expect quiet grandeur.",
         link: "https://houseofrohl-kbis.atypicdev.com/",
         images: [
-          "./images/projects/project-2-1.png",
-          "./images/projects/project-2.png",
-          "./images/projects/project-2-2.png"
+          "./images/projects/project-2-1.webp",
+          "./images/projects/project-2.webp",
+          "./images/projects/project-2-2.webp"
         ]
       },
       futureme: {
@@ -134,9 +133,9 @@ document.addEventListener('DOMContentLoaded', function() {
         description: "At FutureMe, we built something simple yet powerful — a platform that lets you write a message to your future self and be sure it'll reach you, even 10 years from now. Clean design, reliable tech, and smooth delivery — proof that meaningful ideas don't need complexity to last.",
         link: "https://www.futureme.org/",
         images: [
-          "./images/projects/project-3-1.png",
-          "./images/projects/project-3.png",
-          "./images/projects/project-3-2.png"
+          "./images/projects/project-3-1.webp",
+          "./images/projects/project-3.webp",
+          "./images/projects/project-3-2.webp"
         ]
       },
       swap: {
@@ -144,9 +143,9 @@ document.addEventListener('DOMContentLoaded', function() {
         description: "At Window Swap, we built a serene digital escape — a global window whose view changes every time. With seamless transitions and minimal design, users drift into peaceful scenes across the world. If you dreamed the web could pause and breathe, here it is.",
         link: "https://window-swap.com",
         images: [
-          "./images/projects/project-4-1.png",
-          "./images/projects/project-4.png",
-          "./images/projects/project-4-2.png"
+          "./images/projects/project-4-1.webp",
+          "./images/projects/project-4.webp",
+          "./images/projects/project-4-2.webp"
         ]
       },
       genoneai: {
@@ -154,13 +153,13 @@ document.addEventListener('DOMContentLoaded', function() {
         description: "At GenOneAI, we crafted a sleek digital interface that brings multiple AI tools under one roof. With streamlined navigation, intuitive flows and minimalist visuals, we turned complexity into clarity — so users can jump straight into outcomes, not onboarding. Designed by ApexStudios, built for those who demand instant access to next-level intelligence.",
         link: "https://www.figma.com/proto/kEOhvhSwDafPIhz1PE95sR/GenOneAI--MVP-?page-id=0%3A1&node-id=73-14&p=f&t=Lz394y3Ss5sHtw7B-1&scaling=scale-down&content-scaling=fixed",
         images: [
-          "./images/projects/phone-1.png",
-          "./images/projects/phone-2.png",
-          "./images/projects/phone-3.png",
-          "./images/projects/phone-4.png",
-          "./images/projects/phone-5.png",
-          "./images/projects/phone-6.png",
-          "./images/projects/phone-7.png",
+          "./images/projects/phone-1.webp",
+          "./images/projects/phone-2.webp",
+          "./images/projects/phone-3.webp",
+          "./images/projects/phone-4.webp",
+          "./images/projects/phone-5.webp",
+          "./images/projects/phone-6.webp",
+          "./images/projects/phone-7.webp",
         ]
       },
       xuva: {
@@ -168,9 +167,9 @@ document.addEventListener('DOMContentLoaded', function() {
         description: "At Xuva, heritage flavours meet digital finesse. We crafted a responsive site for this Mexico City gem that echoes the spirit of Oaxaca — vibrant, refined and deeply rooted. With immersive visuals and polished UX, the experience invites visitors to step beyond a menu and into a curated world of taste, texture and culture. Luxury done quietly.",
         link: "https://xuva.mx/",
         images: [
-          "./images/projects/project-5-1.png",
-          "./images/projects/project-5.png",
-          "./images/projects/project-5-2.png"
+          "./images/projects/project-5-1.webp",
+          "./images/projects/project-5.webp",
+          "./images/projects/project-5-2.webp"
         ]
       },
     };

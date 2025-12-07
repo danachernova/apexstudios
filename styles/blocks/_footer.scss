@@ -1,6 +1,7 @@
 @use '../helpers' as *;
 
 .footer {
+  background-color: var(--color-bg-main);
   @include mobile {
     padding-block: rem(15);
   }
@@ -20,9 +21,9 @@
   &__link {
   }
   &_contacts {
+    display: grid;
     white-space: nowrap;
     padding-bottom: rem(25);
-    display: grid;
     row-gap: rem(5);
 
     & a {
