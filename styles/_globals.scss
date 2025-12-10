@@ -2,36 +2,38 @@
 
 body {
   @include fluid-text(16, 20);
-
-  padding-top: fluid(10,20);
-
   display: flex;
   flex-direction: column;
 
   font-family: var(--font-family-base);
   color: var(--color-light-d1);
-
-  background-image: url(../images/bg-main.svg);
-  background-size: 100% auto;
-  background-position: 0 0;
-  background-repeat: no-repeat;
   background-color: var(--color-bg-main);
 
-  @include mobile {
-    background-size: 150% auto;
-  }
+  padding-top: var(--padding-header-top);
 
-  &:has(.projects) {
-    background-image: none;
-    background-color: var(--color-bg-main);
+  @include tablet-above {
+
+    background-image: url(../images/bg-main.svg);
+    background-size: 100% auto;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+
+    &:has(.projects) {
+      background-image: none;
+    }
   }
 }
 
 main {
   flex-grow: 1;
-  overflow-x: hidden;
-  overflow-y: clip;
+  overflow: hidden;
   user-select: none;
+
+  & section:not(:last-child){
+    @include tablet-above {
+      margin-bottom: rem(100);
+    }
+  }
 }
 
 a,

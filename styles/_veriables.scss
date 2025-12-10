@@ -15,8 +15,13 @@
 
   --container-width: #{rem(1180)};
   --container-padding-x: #{rem(16)};
+  --padding-header-top: #{rem(15)};
+  --footer-height: #{rem(190)};
 
   --header-height: #{rem(56)};
+  @include mobile-s {
+    --header-height: #{rem(70)};
+  }
 
   --transition-duration: 0.2s;
 

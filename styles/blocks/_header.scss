@@ -28,6 +28,7 @@
 
       @include mobile-s {
         flex-wrap: wrap;
+        padding-block: rem(10);
       }
       @include mobile {
         column-gap: rem(10);

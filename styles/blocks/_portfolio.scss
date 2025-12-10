@@ -2,19 +2,15 @@
 
 .portfolio {
   position: relative;
-  padding-block: rem(100);
-  margin-bottom: rem(40);
+  padding-block: rem(50);
+  margin-block: rem(50);
   user-select: none;
-
   @include flex-center();
   flex-direction: column;
-  row-gap: rem(50);
+  row-gap: rem(20);
 
-  @include tablet {
-    row-gap: rem(25);
-  }
-  @include mobile {
-    padding-block: rem(50);
+  @include mobile-s {
+    margin-block: rem(10);
   }
 
   &__collection {
@@ -31,12 +27,16 @@
 
 
   &__slide {
-    max-width: 30vw;
-    @include tablet {
-      max-width: 60vw;
+    object-fit: cover;
+    max-width: 27vw;
+    @include laptop {
+      max-width: 35vw;
     }
-    @include mobile-s {
-      max-width: 75vw;
+    @include tablet {
+      max-width: 40vw;
+    }
+    @include mobile {
+      max-width: 320px;
     }
 
     & img {
@@ -48,6 +48,10 @@
   &__title {
     font-size: fluid(30,64);
     letter-spacing: -0.04em;
+
+    @include mobile-s {
+      display: none;
+    }
   }
 }
 

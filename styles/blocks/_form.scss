@@ -8,11 +8,12 @@
     display: grid;
 
     z-index: 100;
+    overflow: hidden;
 
     &::before {
-      content: "CONTACT US CONTACT US CONTACT US CONTACT US";
+      content: "CONTACT US CONTACT US CONTACT US";
       position: absolute;
-      top: 0;
+      top: 5%;
       transform: translateX(-25%);
       font-size: fluid(40,120);
       font-weight: 600;
@@ -24,12 +25,11 @@
 
       @include laptop-above {
         inset: auto;
-        top: 0;
         left: 50%;
         transform: translateX(-50%);
       }
 
-      @include mobile-s {
+      @include mobile {
         display: none;
       }
     }

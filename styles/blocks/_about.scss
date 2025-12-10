@@ -2,43 +2,46 @@
 
 
 .about {
-    margin-block: fluid(50,100);
+ display: flex;
+ align-items: center;
   &__inner {
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(50);
+    @include mobile-s {
+      row-gap: rem(20);
+    }
   }
   &__title {
     font-size: fluid(40,64);
     text-wrap: nowrap;
     letter-spacing: -0.04em;
-
-    &:not(:last-child){
-      padding-bottom: rem(52);
-      @include mobile {
-        padding-bottom: rem(30);
-      }
-    }
+    flex-shrink: 0;
   }
   &__list {
-    display: grid;
-    row-gap: rem(36);
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(20);
 
-    @include tablet {
-      row-gap: rem(30);
-    }
-    @include mobile {
-      row-gap: rem(20);
+    @include mobile-s {
+      row-gap: rem(10);
     }
   }
 
   &__item {
-    z-index: 100;
     position: relative;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     row-gap: rem(10);
     border-radius: 40px;
-    font-size: fluid(22,32);
-    padding: rem(36) rem(50);
-    @include mobile {
-      padding: rem(30);
+    font-size: fluid(19,32);
+    padding: rem(35) rem(50);
+    @include tablet {
+      padding: rem(35);
+    }
+    @include mobile-s {
+      padding: rem(20);
     }
 
     &::before {

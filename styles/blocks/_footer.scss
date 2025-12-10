@@ -1,20 +1,19 @@
 @use '../helpers' as *;
 
 .footer {
-  background-color: var(--color-bg-main);
-  @include mobile {
-    padding-block: rem(15);
-  }
-  padding-block: rem(22);
   font-size: rem(14);
   font-weight: 100;
   letter-spacing: -0.04em;
   text-align: center;
+  height: var(--footer-height);
   &__inner {
     @include flex-center();
   }
   &__list {
-
+    @include mobile {
+      padding-block: rem(15);
+    }
+    padding-block: rem(22);
   }
   &__item {
   }
@@ -23,7 +22,7 @@
   &_contacts {
     display: grid;
     white-space: nowrap;
-    padding-bottom: rem(25);
+    padding-bottom: rem(20);
     row-gap: rem(5);
 
     & a {

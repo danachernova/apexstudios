@@ -7,8 +7,6 @@
 @use 'blocks/logo';
 @use 'blocks/header';
 
-@use 'blocks/animation-section';
-
 @use 'blocks/button';
 @use 'blocks/clouds';
 @use 'blocks/banner';
@@ -18,11 +16,11 @@
 @use 'blocks/collection';
 @use 'blocks/portfolio';
 
+@use 'blocks/form-gradient';
+@use 'blocks/form';
+
 @use 'blocks/description';
 @use 'blocks/genoneai';
 @use 'blocks/projects';
-
-@use 'blocks/form-gradient';
-@use 'blocks/form';
 
 @use 'blocks/footer';
