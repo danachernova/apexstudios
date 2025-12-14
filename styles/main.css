@@ -335,6 +335,18 @@ a[class] {
   text-decoration: none;
 }
 
+.hidden-element {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.element-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .logo {
   font-family: var(--font-family-accent);
   font-size: clamp(0.875rem, 0.5664556962rem + 1.2658227848vw, 1.5rem);
@@ -602,7 +614,7 @@ a[class] {
   flex-direction: column;
   row-gap: 3.125rem;
 }
-@media (width <= 34.43625rem) {
+@media (width <= 58.81125rem) {
   .about__inner {
     row-gap: 1.25rem;
   }

@@ -1,0 +1,16 @@
+@use '../helpers' as *;
+
+.hidden-element {
+  opacity: 0;
+  transform: translateY(50px);
+  transition-duration: var(--transition-duration);
+}
+
+.element-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
