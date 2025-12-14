@@ -50,7 +50,6 @@
     & > section:first-of-type {
       @include tablet {
         padding-top: calc(var(--header-height) + var(--padding-header-top) + 8vh);
-      ;
       }
     }
   }

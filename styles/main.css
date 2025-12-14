@@ -337,9 +337,8 @@ a[class] {
 
 .hidden-element {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  will-change: opacity, transform;
+  transform: translateY(50px);
+  transition-duration: var(--transition-duration);
 }
 
 .element-show {
@@ -547,8 +546,8 @@ a[class] {
 .banner {
   position: relative;
   padding-block: 3.125rem;
-  height: calc(100vh - var(--header-height) - var(--padding-header-top));
   user-select: none;
+  height: calc(100vh - var(--header-height) - var(--padding-header-top));
 }
 @media (width <= 58.81125rem) {
   .banner {
