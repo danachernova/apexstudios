@@ -73,7 +73,7 @@ function initSwiper(selector, enableAutoplay = true) {
 
 document.addEventListener('DOMContentLoaded', function() {
   if (document.querySelector('.portfolio__inner')) {
-    initSwiper('.portfolio__inner');
+    initSwiper('.portfolio__inner',false);
   }
   if (document.querySelector('.projects__inner')) {
     setTimeout(() => {

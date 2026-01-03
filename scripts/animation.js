@@ -13,7 +13,7 @@ const elements = document.querySelectorAll('main > section > *:not(.banner__clou
       if (entry.isIntersecting) {
          setTimeout(() => {
           entry.target.classList.add('element-show');
-        }, 100);
+        }, 50);
       } else {
         entry.target.classList.remove('element-show');
       }

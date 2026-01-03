@@ -344,6 +344,7 @@ a[class] {
 .element-show {
   opacity: 1;
   transform: translateY(0);
+  transition-duration: var(--transition-duration);
 }
 
 .logo {
@@ -546,8 +547,8 @@ a[class] {
 .banner {
   position: relative;
   padding-block: 3.125rem;
-  user-select: none;
   height: calc(100vh - var(--header-height) - var(--padding-header-top));
+  user-select: none;
 }
 @media (width <= 58.81125rem) {
   .banner {
