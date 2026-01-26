@@ -74,7 +74,7 @@
 .cloud {
   animation-timeline: scroll(root block);
   animation-duration: var(--transition-duration);
-  animation-range: entry 5% exit 50%;
+  animation-range: entry 0% exit 50%;
 }
 
 .cloud--l1,

@@ -8,18 +8,43 @@ body {
   font-family: var(--font-family-base);
   color: var(--color-light-d1);
   background-color: var(--color-bg-main);
-
   padding-top: var(--padding-header-top);
 
   @include tablet-above {
+//    background-image: url(../images/bg-main.svg);
+//    background-size: 100% auto;
+//    background-position: 0 0;
+//    background-repeat: no-repeat;
+//
+//    &:has(.projects) {
+//      background-image: none;
+//    }
+  }
 
-    background-image: url(../images/bg-main.svg);
-    background-size: 100% auto;
-    background-position: 0 0;
-    background-repeat: no-repeat;
+  background-image: url(../images/bg-main.svg);
+  background-size: 100% auto;
+  background-position: 0 0;
+  background-repeat: no-repeat;
 
-    &:has(.projects) {
-      background-image: none;
+  @include mobile {
+    background-size: 150% auto;
+  }
+
+  &:has(.projects){
+    background-image: none;
+  }
+
+  &:has(.header-services){
+    padding-top: 0;
+    box-shadow: inset 0 0 0 100vmax #000000E6;
+
+    & main,
+    & .header-services{
+      padding-inline: var(--container-padding-x);
+      @include laptop-above {
+        max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+        margin-inline: auto;
+      }
     }
   }
 }
@@ -29,8 +54,12 @@ main {
   overflow: hidden;
   user-select: none;
 
-  & section:not(:last-child){
-    @include tablet-above {
+  & section:not(:last-child):not(.services-main-page) {
+//    @include tablet-above {
+//      margin-bottom: rem(100);
+//    }
+
+    @include laptop-above {
       margin-bottom: rem(100);
     }
   }

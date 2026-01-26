@@ -6,16 +6,16 @@
   height: calc(100vh - var(--header-height) - var(--padding-header-top));
   user-select: none;
 
-  @include tablet {
-    background-image: url(../images/bg-main.svg);
-    background-size: 100% auto;
-    background-position: 0 0;
-    background-repeat: no-repeat;
-
-    @include mobile {
-      background-size: 150% auto;
-    }
-  }
+//  @include tablet {
+//    background-image: url(../images/bg-main.svg);
+//    background-size: 100% auto;
+//    background-position: 0 0;
+//    background-repeat: no-repeat;
+//
+//    @include mobile {
+//      background-size: 150% auto;
+//    }
+//  }
 
  &__main {
    display: flex;
@@ -31,6 +31,8 @@
     max-width: fluid(250,1054);
     letter-spacing: -0.04em;
     color: var(--color-accent);
+
+    padding-bottom: rem(50);
   }
 
   &__title {

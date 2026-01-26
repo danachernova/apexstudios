@@ -26,16 +26,19 @@
       column-gap: rem(20);
       height: var(--header-height);
 
-      @include mobile-s {
+      @include mobile {
         flex-wrap: wrap;
         padding-block: rem(10);
       }
-      @include mobile {
+      @include mobile  {
         column-gap: rem(10);
+      }
+      @include mobile-s {
+        column-gap: rem(5);
       }
     }
     &-item {
-      @include mobile-s {
+      @include mobile  {
         &:has(a.logo){
           order: -1;
           flex-basis: 100%;
@@ -47,7 +50,7 @@
       @include mobile-above {
         padding: rem(10);
       }
-      @include mobile {
+      @include mobile  {
         padding-block: rem(5);
       }
       @include hover {

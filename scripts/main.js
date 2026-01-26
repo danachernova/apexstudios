@@ -241,13 +241,12 @@ const progressContainer = document.querySelector('.form__progress');
 
 const totalSteps = steps.length;
 let currentStep = 1;
+let isServiceFlow = false;
 
 function updateSteps(step) {
   steps.forEach(s => {
     const sStep = Number(s.dataset.step);
-
-    if (sStep === step) s.classList.add('active');
-    else s.classList.remove('active');
+    s.classList.toggle('active', sStep === step);
   });
 
   updateProgress(step);
@@ -257,23 +256,33 @@ function updateProgress(step) {
   const activeStep = document.querySelector(`.form-step[data-step="${step}"]`);
 
   if (activeStep && activeStep.dataset.hideProgress === "true") {
-    if (progressBar) progressBar.style.width = '0%';
-    if (progressContainer) progressContainer.style.opacity = '0';
+    progressBar.style.width = '0%';
+    progressContainer.style.opacity = '0';
     return;
   }
-  const percentage = (step - 1) / (totalSteps - 2) * 100;
-  if (progressBar) progressBar.style.width = percentage + '%';
-  if (progressContainer) progressContainer.style.opacity = '1';
+
+  const totalVisibleSteps = isServiceFlow ? 3 : steps.length; // учитываем короткий поток
+  const percentage = ((step - 1) / (totalVisibleSteps - 1)) * 100;
+
+  progressBar.style.width = percentage + '%';
+  progressContainer.style.opacity = '1';
 }
-
-
 nextButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    const next = Number(btn.dataset.next);
+    let next = Number(btn.dataset.next);
+    if (isServiceFlow && next === 3) {
+      next = 5;
+    }
+
     currentStep = next;
     updateSteps(currentStep);
   });
 });
+
+function resetFormFlow() {
+  currentStep = 1;
+  updateSteps(currentStep);
+}
 
 //choose project-type and budget buttons
 
@@ -338,6 +347,11 @@ function getFormData() {
   const budgetInput = document.querySelector('#budget');
   if (budgetInput) formData.budget = budgetInput.value;
 
+  const projectServiceInput = document.querySelector('#project-service');
+  if (projectServiceInput) {
+    formData.project_service = projectServiceInput.value;
+  }
+
   const commentInput = document.querySelector('#comment');
   if (commentInput) formData.comment = commentInput.value.trim();
 
@@ -350,11 +364,123 @@ if (formElement) {
     e.preventDefault(); // форма не отправляется на сервер, здесь шаманит Ваня, объект json в консоли
     const dataToSend = getFormData();
     console.log('Ваня, лови данные', JSON.stringify(dataToSend, null, 2));
-
     currentStep = steps.length;
     updateSteps(currentStep);
   });
 }
+
+
+// дополнение объекта при нажатии Get Started
+document.querySelectorAll('.service__button').forEach(button => {
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const service = button.closest('.service');
+    const section = button.closest('.services');
+
+    if (!service || !section) return;
+    const projectType = section.id || '';
+    const serviceTitle = service.querySelector('.service__title')?.textContent.trim() || '';
+    const priceText = service.querySelector('.service__price')?.textContent.trim() || '';
+
+    const projectTypeInput = document.querySelector('#project-type');
+    const budgetInput = document.querySelector('#budget');
+    const projectServiceInput = document.querySelector('#project-service');
+
+    if (projectTypeInput) projectTypeInput.value = projectType;
+    if (budgetInput) budgetInput.value = priceText;
+    if (projectServiceInput) projectServiceInput.value = serviceTitle;
+
+    isServiceFlow = true;
+
+    currentStep = 1;
+    updateSteps(currentStep);
+    updateProgress(currentStep);
+
+    currentStep = 1;
+    updateSteps(currentStep);
+    updateProgress(currentStep);
+
+    document.querySelector('#contactus')?.scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+
+
+//выбор категории - показ секции - назад
+const allServicesSection = document.querySelector('.all-services');
+const servicesSections = document.querySelectorAll('.services-main-page');
+const headerCategory = document.querySelector('.header-services__category');
+const backButton = document.querySelector('.header-services__back');
+const formSection = document.querySelector('.form');
+
+servicesSections.forEach(section => {
+  section.classList.add('hidden-mobile');
+});
+
+let isCategoryOpened = false;
+
+function showCategories() {
+  isCategoryOpened = false;
+
+  allServicesSection?.classList.remove('hidden-mobile');
+
+  servicesSections.forEach(section => {
+    section.classList.add('hidden-mobile');
+  });
+
+  headerCategory.textContent = 'All Services';
+}
+
+function showCategory(categoryId, categoryTitle) {
+  isCategoryOpened = true;
+
+  allServicesSection?.classList.add('hidden-mobile');
+
+  servicesSections.forEach(section => {
+    section.classList.add('hidden-mobile'); // скрываем все секции
+  });
+  formSection?.classList.add('hidden-mobile');
+
+  const activeSection = document.querySelector(`#${categoryId}`);
+  if (!activeSection) return;
+  activeSection.classList.remove('hidden-mobile');
+
+  headerCategory.textContent = categoryTitle;
+}
+
+document.querySelectorAll('.category__button').forEach(button => {
+  button.addEventListener('click', () => {
+    const categoryItem = button.closest('.category');
+    if (!categoryItem) return;
+
+    const categoryId = categoryItem.dataset.category;
+    const categoryTitle =
+      categoryItem.querySelector('.category__title')?.textContent.trim() || '';
+
+    showCategory(categoryId, categoryTitle);
+  });
+});
+
+backButton?.addEventListener('click', () => {
+  if (isCategoryOpened) {
+    showCategories();
+  } else {
+    window.location.href = 'index.html';
+  }
+});
+
+document.querySelectorAll('.service__button').forEach(button => {
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    if (!formSection) return;
+
+    formSection.classList.remove('hidden-mobile');
+  });
+});
+
 
 
 

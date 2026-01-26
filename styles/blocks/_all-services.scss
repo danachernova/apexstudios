@@ -1,0 +1,12 @@
+@use '../helpers' as *;
+
+.all-services {
+  padding-block: rem(30);
+  &__list {
+    display: grid;
+    row-gap: rem(20);
+  }
+  &__item {
+
+  }
+}

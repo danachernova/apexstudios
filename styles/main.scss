@@ -19,11 +19,19 @@
 @use 'blocks/collection';
 @use 'blocks/portfolio';
 
+@use 'blocks/services';
+@use 'blocks/service';
+
 @use 'blocks/form-gradient';
 @use 'blocks/form';
 
 @use 'blocks/description';
 @use 'blocks/genoneai';
 @use 'blocks/projects';
+
+@use 'blocks/header-services';
+@use 'blocks/all-services';
+@use 'blocks/category';
+@use  'blocks/services-main';
 
 @use 'blocks/footer';

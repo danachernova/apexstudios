@@ -1,0 +1,33 @@
+@use '../helpers' as *;
+
+main:has(.services-main-page) {
+  & .form:before {
+    display: none;
+  }
+}
+
+.services-main-page {
+ & .services__header {
+    width: 100%;
+   justify-content: start;
+ }
+  & .services__title {
+    font-weight: 600;
+  }
+  &:not(:last-child){
+    margin-bottom: rem(30);
+  }
+  &:has(.services__title){
+    margin-block: rem(50) rem(5);
+  }
+
+  & .services__inner {
+    padding-block: 0;
+  }
+  & .services__item {
+    height: min-content;
+  }
+  & .service__button {
+    margin-top: 0;
+  }
+}
