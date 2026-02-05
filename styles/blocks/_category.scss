@@ -5,6 +5,7 @@
   grid-template-columns: auto rem(36);
   column-gap: rem(5);
   padding: rem(30);
+  cursor: pointer;
   &__body {
     @include mobile {
       max-width: 90%;

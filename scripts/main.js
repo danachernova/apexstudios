@@ -73,7 +73,7 @@ function initSwiper(selector, enableAutoplay = true) {
 
 document.addEventListener('DOMContentLoaded', function() {
   if (document.querySelector('.portfolio__inner')) {
-    initSwiper('.portfolio__inner',false);
+    initSwiper('.portfolio__inner');
   }
   if (document.querySelector('.projects__inner')) {
     setTimeout(() => {
@@ -371,33 +371,56 @@ if (formElement) {
 
 
 // дополнение объекта при нажатии Get Started
+
 document.querySelectorAll('.service__button').forEach(button => {
   button.addEventListener('click', (e) => {
     e.preventDefault();
 
     const service = button.closest('.service');
     const section = button.closest('.services');
-
     if (!service || !section) return;
+
     const projectType = section.id || '';
-    const serviceTitle = service.querySelector('.service__title')?.textContent.trim() || '';
-    const priceText = service.querySelector('.service__price')?.textContent.trim() || '';
+    const serviceTitle =
+      service.querySelector('.service__title')?.textContent.trim() || '';
+    const priceText =
+      service.querySelector('.service__price')?.textContent.trim() || '';
 
     const projectTypeInput = document.querySelector('#project-type');
     const budgetInput = document.querySelector('#budget');
     const projectServiceInput = document.querySelector('#project-service');
 
-    if (projectTypeInput) projectTypeInput.value = projectType;
-    if (budgetInput) budgetInput.value = priceText;
-    if (projectServiceInput) projectServiceInput.value = serviceTitle;
+    const projectStep = document.querySelector('.form__project-type');
+    if (projectStep) {
+      const options = projectStep.querySelectorAll('.form__option');
+
+      options.forEach(option => {
+        option.classList.toggle(
+          'active',
+          option.dataset.value === projectType
+        );
+      });
+
+      if (projectTypeInput) {
+        projectTypeInput.value = projectType;
+      }
+    }
+
+    if (budgetInput) {
+      budgetInput.value = priceText;
+    }
+
+    if (projectServiceInput) {
+      projectServiceInput.value = serviceTitle;
+    }
 
     isServiceFlow = true;
 
-    currentStep = 1;
-    updateSteps(currentStep);
-    updateProgress(currentStep);
+    const hasProject = projectTypeInput?.value;
+    const hasBudget = budgetInput?.value;
 
-    currentStep = 1;
+    currentStep = (hasProject && hasBudget) ? 3 : 1;
+
     updateSteps(currentStep);
     updateProgress(currentStep);
 
@@ -406,6 +429,7 @@ document.querySelectorAll('.service__button').forEach(button => {
     });
   });
 });
+
 
 
 //выбор категории - показ секции - назад
@@ -450,10 +474,9 @@ function showCategory(categoryId, categoryTitle) {
   headerCategory.textContent = categoryTitle;
 }
 
-document.querySelectorAll('.category__button').forEach(button => {
-  button.addEventListener('click', () => {
-    const categoryItem = button.closest('.category');
-    if (!categoryItem) return;
+document.querySelectorAll('.category').forEach(categoryItem => {
+  categoryItem.addEventListener('click', (e) => {
+    e.preventDefault();
 
     const categoryId = categoryItem.dataset.category;
     const categoryTitle =
@@ -462,6 +485,7 @@ document.querySelectorAll('.category__button').forEach(button => {
     showCategory(categoryId, categoryTitle);
   });
 });
+
 
 backButton?.addEventListener('click', () => {
   if (isCategoryOpened) {
